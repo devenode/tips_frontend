@@ -1,21 +1,37 @@
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import Logo from './Logo';
+import Search from './Search';
+import EditTextPanel from './EditTextPanel';
+import AddNewButton from './AddNewButton';
+import SaveButton from './SaveButton';
+
+
 
 const Navigation = props => {
    return (
-      <div>
-         <ul>
-            <li><Link to="/" >Home</Link></li>
-            <li><Link to="/post/1" >See Post</Link></li>
-            <li><Link to="/create-post" >Create Post</Link></li>
-            <li><Link to="/edit-post/1" >Edit Post</Link></li>
-         </ul>
-      </div>
+      <nav>
+         <Logo />
+
+         <Routes>
+            <Route path="/*" element={<Search />} />
+
+            <Route path="/*" element={<EditTextPanel />}>
+               <Route path="create-post" element={<></>} />
+               <Route path="edit-post/:id" element={<></>} />
+            </Route>
+         </Routes>
+
+         <Routes>
+            <Route path="/*" element={<AddNewButton />} />
+
+            <Route path="/*" element={<SaveButton />}>
+               <Route path="create-post" element={<></>} />
+               <Route path="edit-post/:id" element={<></>} />
+            </Route>
+         </Routes>
+      </nav>
    )
 }
 
-Navigation.propTypes = {
-
-}
 
 export default Navigation
