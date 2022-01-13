@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom';
+
 export const Logo = props => {
    return (
-      <div>
-         Logo
-      </div>
+      <p className="main-logo"><Link to="/">#tips</Link></p>
    )
 }
 

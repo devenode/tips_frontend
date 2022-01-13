@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+
 
 const EditTextPanel = props => {
    return (
@@ -8,8 +8,6 @@ const EditTextPanel = props => {
    )
 }
 
-EditTextPanel.propTypes = {
 
-}
 
 export default EditTextPanel

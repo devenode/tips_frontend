@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
+
+
 const SaveButton = props => {
    return (
-      <div>
-         SaveButton
-      </div>
+      <p className="txt-btn">
+         <Link to="#">Save</Link>
+      </p>
    )
 }
 

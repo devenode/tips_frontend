@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
+
 export const AddNewButton = props => {
    return (
-      <div>
-         AddNewButton
-      </div>
+      <p className="txt-btn">
+         <Link to="/create-post">Add new tip</Link>
+      </p>
    )
 }
 

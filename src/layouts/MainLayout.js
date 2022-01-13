@@ -4,11 +4,13 @@ import Navigation from '../components/Navigation';
 
 const Layout = props => {
    return (
-      <div className="content">
+      <>
          <Navigation />
+         <div className="content">
 
-         <Outlet />
-      </div>
+            <Outlet />
+         </div>
+      </>
    )
 }
 

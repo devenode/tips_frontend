@@ -31,6 +31,9 @@ input {
    margin: 0;
    width: 100%;
    transition: box-shadow .2s ease;
+   border: 1px solid #D9DDE1;
+   border-radius: 4px;
+   padding: 8px 15px 8px 32px;
    -webkit-appearance: none;
    -moz-appearance: none;
 }
@@ -169,6 +172,45 @@ a:hover {
 }
 .content {
    width: 100%;
-   max-width: 970px;
+   max-width: 1000px;
    margin: 0 auto;
+   padding: 0 15px;
+}
+nav {
+   display: flex;
+   align-items: center;
+   border-bottom: 1px solid #D9DDE1;
+   height: 69px;
+   background-color: #fff;
+   margin: 0 0 15px 0;
+   position: fixed;
+   width: 100%;
+}
+.nav-box {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.main-logo {
+   font-size: 1.35rem;
+   font-weight: 700;
+}
+.main-logo > a {
+   text-decoration: none;
+}
+.txt-btn {
+   font-size: .82rem;
+   font-weight: 700;
+}
+.input-box {
+   position: relative;
+}
+.input-box > img {
+   position: absolute;
+   top: 13px;
+   left: 13px;
+}
+.main-search {
+   flex-grow: 1;
+   max-width: 400px;
 }

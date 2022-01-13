@@ -10,25 +10,27 @@ import SaveButton from './SaveButton';
 const Navigation = props => {
    return (
       <nav>
-         <Logo />
+         <div className="nav-box content">
+            <Logo />
 
-         <Routes>
-            <Route path="/*" element={<Search />} />
+            <Routes>
+               <Route path="/*" element={<Search />} />
 
-            <Route path="/*" element={<EditTextPanel />}>
-               <Route path="create-post" element={<></>} />
-               <Route path="edit-post/:id" element={<></>} />
-            </Route>
-         </Routes>
+               <Route path="/*" element={<EditTextPanel />}>
+                  <Route path="create-post" element={<></>} />
+                  <Route path="edit-post/:id" element={<></>} />
+               </Route>
+            </Routes>
 
-         <Routes>
-            <Route path="/*" element={<AddNewButton />} />
+            <Routes>
+               <Route path="/*" element={<AddNewButton />} />
 
-            <Route path="/*" element={<SaveButton />}>
-               <Route path="create-post" element={<></>} />
-               <Route path="edit-post/:id" element={<></>} />
-            </Route>
-         </Routes>
+               <Route path="/*" element={<SaveButton />}>
+                  <Route path="create-post" element={<></>} />
+                  <Route path="edit-post/:id" element={<></>} />
+               </Route>
+            </Routes>
+         </div>
       </nav>
    )
 }
