@@ -6,8 +6,7 @@ const Layout = props => {
    return (
       <>
          <Navigation />
-         <div className="content">
-
+         <div className="content nav-margin">
             <Outlet />
          </div>
       </>

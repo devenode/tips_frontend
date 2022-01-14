@@ -1,48 +1,43 @@
-import { useState, useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+// import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPosts } from '../actions';
 
 
-
-
-
-const Test = props => {
-   useEffect(() => {
-      console.log(`Test component useEffect ran`)
-   }, []);
-
-   console.log(`Test rendered`);
-
-   return (
-      <div>Test Component</div>
-   )
-}
 
 const EditPost = props => {
-   const { id } = useParams();
+   // const { id } = useParams();
 
-   const [postId, setPostId] = useState(1);
+   const { isLoading, error, posts } = useSelector(state => state.posts);
+   const dispatch = useDispatch();
+
    useEffect(() => {
-      console.log(`EditPost component useEffect ran`)
-   }, []);
+      dispatch(getPosts(`https://jsonplaceholder.typicode.com/posts`));
+   }, [dispatch]);
 
-   const handleClick = e => {
-      setPostId(postId + 1);
+
+   
+
+
+
+   if (isLoading) {
+      return <div>Posts are Loading...</div>
    }
 
-   console.log(`EditPost rendered`);
+   if (error) {
+      return <div>Error: {error}</div>
+   }
 
    return (
       <div>
-         <Test />
-         <p>EditPost with ID: {postId}</p>
-         <button onClick={handleClick}>Click me</button>
+         {
+            posts.map((el, i) => {
+               return <p key={i}>{JSON.stringify(el)}</p>
+            })
+         }
       </div>
    )
 }
 
-EditPost.propTypes = {
-
-}
 
 export default EditPost

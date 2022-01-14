@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types'
-
 const Error404 = props => {
    return (
       <div>
@@ -8,8 +6,5 @@ const Error404 = props => {
    )
 }
 
-Error404.propTypes = {
-
-}
 
 export default Error404

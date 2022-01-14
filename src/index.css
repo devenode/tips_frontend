@@ -176,14 +176,17 @@ a:hover {
    margin: 0 auto;
    padding: 0 15px;
 }
+.nav-margin {
+   margin-top: 85px;
+}
 nav {
    display: flex;
    align-items: center;
    border-bottom: 1px solid #D9DDE1;
    height: 69px;
    background-color: #fff;
-   margin: 0 0 15px 0;
    position: fixed;
+   top: 0;
    width: 100%;
 }
 .nav-box {
