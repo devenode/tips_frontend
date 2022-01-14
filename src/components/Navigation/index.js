@@ -1,16 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
-import Logo from './Logo';
-import Search from './Search';
-import EditTextPanel from './EditTextPanel';
-import AddNewButton from './AddNewButton';
-import SaveButton from './SaveButton';
+import Logo from '../Logo';
+import Search from '../Search';
+import EditTextPanel from '../EditTextPanel';
+import AddNewButton from '../AddNewButton';
+import SaveButton from '../SaveButton';
+import s from './styles.module.css';
 
 
 
 const Navigation = props => {
    return (
       <nav>
-         <div className="nav-box content">
+         <div className={`${s.navBox} content`}>
             <Logo />
 
             <Routes>

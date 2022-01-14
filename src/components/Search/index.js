@@ -1,6 +1,7 @@
-import searchSVG from '../icons/search.svg';
+import searchSVG from '../../icons/search.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeSearchInput } from '../actions'
+import { changeSearchInput } from '../../actions/mainSearch';
+import s from './styles.module.css';
 
 
 export const Search = props => {
@@ -12,7 +13,7 @@ export const Search = props => {
    }
 
    return (
-      <div className="input-box main-search">
+      <div className={`input-box ${s.mainSearch}`}>
          <img src={searchSVG} alt="" />
          <input type="text" placeholder="Search…" onChange={handleSearchInputChange} value={searchState.value} />
       </div>

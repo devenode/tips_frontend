@@ -1,0 +1,15 @@
+nav {
+   display: flex;
+   align-items: center;
+   border-bottom: 1px solid #D9DDE1;
+   height: 69px;
+   background-color: #fff;
+   position: fixed;
+   top: 0;
+   width: 100%;
+}
+.navBox {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}

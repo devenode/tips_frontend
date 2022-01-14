@@ -1,4 +1,4 @@
-import { MAINSEARCH_CHANGE_INPUT } from '../actions';
+import { MAINSEARCH_CHANGE_INPUT } from '../actions/mainSearch';
 
 
 const initState = {

@@ -179,28 +179,6 @@ a:hover {
 .nav-margin {
    margin-top: 85px;
 }
-nav {
-   display: flex;
-   align-items: center;
-   border-bottom: 1px solid #D9DDE1;
-   height: 69px;
-   background-color: #fff;
-   position: fixed;
-   top: 0;
-   width: 100%;
-}
-.nav-box {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-}
-.main-logo {
-   font-size: 1.35rem;
-   font-weight: 700;
-}
-.main-logo > a {
-   text-decoration: none;
-}
 .txt-btn {
    font-size: .82rem;
    font-weight: 700;
@@ -212,8 +190,4 @@ nav {
    position: absolute;
    top: 13px;
    left: 13px;
-}
-.main-search {
-   flex-grow: 1;
-   max-width: 400px;
 }

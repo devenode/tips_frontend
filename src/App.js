@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import PageLoading from './components/PageLoading';
+import PageLoader from './components/PageLoader';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import Error404 from './pages/Error404';
@@ -16,9 +16,9 @@ const App = props => {
       <Routes>
          <Route path="/*" element={<MainLayout />}>
             <Route index element={<Home />} />
-            <Route path="post/:id" element={<Suspense fallback={<PageLoading />}><Post /></Suspense>} />
-            <Route path="create-post" element={<Suspense fallback={<PageLoading />}><CreatePost /></Suspense>} />
-            <Route path="edit-post/:id" element={<Suspense fallback={<PageLoading />}><EditPost /></Suspense>} />
+            <Route path="post/:id" element={<Suspense fallback={<PageLoader />}><Post /></Suspense>} />
+            <Route path="create-post" element={<Suspense fallback={<PageLoader />}><CreatePost /></Suspense>} />
+            <Route path="edit-post/:id" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
             <Route path="*" element={<Error404 />} />
          </Route>
       </Routes>

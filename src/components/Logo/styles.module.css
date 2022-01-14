@@ -1,0 +1,7 @@
+.mainLogo {
+   font-size: 1.35rem;
+   font-weight: 700;
+}
+.mainLogo > a {
+   text-decoration: none;
+}
