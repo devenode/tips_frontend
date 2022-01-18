@@ -2,13 +2,15 @@ import { Routes, Route } from 'react-router-dom';
 import Logo from '../Logo';
 import Search from '../Search';
 import EditTextPanel from '../EditTextPanel';
-import AddNewButton from '../AddNewButton';
-import SaveButton from '../SaveButton';
+import BlueButton from '../BlueButton';
 import s from './styles.module.css';
+import { useNavigate } from "react-router-dom";
 
 
 
 const Navigation = props => {
+   const navigate = useNavigate();
+
    return (
       <nav>
          <div className={`${s.navBox} content`}>
@@ -24,9 +26,10 @@ const Navigation = props => {
             </Routes>
 
             <Routes>
-               <Route path="/*" element={<AddNewButton />} />
+               <Route path="/*" element={<BlueButton title="Add new tip" handleClick={() => navigate(`/create-post`)} />} />
 
-               <Route path="/*" element={<SaveButton />}>
+               {/* TO DO - create Client api for posts */}
+               <Route path="/*" element={<BlueButton title="Save" handleClick={() => null} />}>
                   <Route path="create-post" element={<></>} />
                   <Route path="edit-post/:id" element={<></>} />
                </Route>

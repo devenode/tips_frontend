@@ -1,0 +1,11 @@
+.blueBtn {
+   font-weight: 700;
+   color: #1366F4;
+   background: #fff;
+   border: none;
+   border-radius: 4px;
+}
+button:focus {
+   box-shadow: 0 0 0 3px #C6E2FF;
+   border: none;
+}
