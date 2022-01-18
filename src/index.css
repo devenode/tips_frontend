@@ -145,6 +145,9 @@ a {
 a:hover {
    color: #0F51C4;
 }
+#root {
+   outline: none;
+}
 .noselect {
    user-select: none;
    -webkit-touch-callout: none; 
@@ -186,4 +189,19 @@ a:hover {
    position: absolute;
    top: 13px;
    left: 13px;
+}
+.two-clmns {
+   display: flex;
+}
+.two-clmns > div:first-of-type {
+   flex-basis: calc(27% - 20px);
+   margin: 0 20px 0 0;
+   overflow-x: hidden;
+}
+.two-clmns > div:last-of-type {
+   flex-basis: 73%;
+}
+.one-clmn {
+   max-width: 700px;
+   margin: 0 auto;
 }
