@@ -196,7 +196,6 @@ a:hover {
 .two-clmns > div:first-of-type {
    flex-basis: calc(27% - 20px);
    margin: 0 20px 0 0;
-   overflow-x: hidden;
 }
 .two-clmns > div:last-of-type {
    flex-basis: 73%;

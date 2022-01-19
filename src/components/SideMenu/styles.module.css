@@ -1,6 +1,65 @@
-.sideMenuBox {
-
+.dot {
+   height: 4px;
+   width: 4px;
+   border-radius: 4px;
+   background-color: #A1A9B8;
+   margin-left: -1px;
 }
-.sectionBox {
-   
+.sideMenuBox > li > div > img {
+   display: none;
+   margin-left: -2.5px;
+}
+.sideMenuBox > li > div > p {
+   color: #A1A9B8;
+   margin: 0 0 0 15px;
+   cursor: pointer;
+   max-width: 220px;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+.sideMenuBox > li > div {
+   display: flex;
+   align-items: center;
+}
+.subsectionBox {
+   padding: 8px 0 8px 30px;
+   border-left: 2px solid #fff;
+}
+.subsectionBox > li {
+   display: none;
+   margin: 0 0 11px 0;
+}
+.subsectionBox > li:last-of-type {
+   margin: 0;
+}
+.subsectionBox > li > a {
+   color: #A1A9B8;
+   font-size: .85rem;
+   text-decoration: none;
+   display: block;
+   max-width: 205px;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+.subsectionBox > li > a:hover,
+.sideMenuBox > li > div > p:hover,
+li.activeSubsection > a {
+   color: #1B1B1B;
+   font-weight: 700;
+}
+.activeSection > .subsectionBox {
+   padding-top: 15px;
+   padding-bottom: 15px;
+   border-left: 2px solid #E9EDF4;
+}
+.activeSection > .subsectionBox > li {
+   display: block;
+}
+.activeSection > div > .dot {
+   display: none;
+}
+.sideMenuBox > li.activeSection > div > img {
+   display: block;
 }

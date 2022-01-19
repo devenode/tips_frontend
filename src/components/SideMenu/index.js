@@ -1,81 +1,39 @@
 import PropTypes from 'prop-types';
 import s from './styles.module.css';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import arrow from '../../icons/arrow-down.svg';
 
 
-const index = props => {
-   // const { sections } = props;
-   const { sections } = {
-      sections: [
-         {
-            id: 1,
-            title: `MySQL`,
-            subsections: [
-               {
-                  id: 1,
-                  title: `Root password reset`
-               },
-               {
-                  id: 2,
-                  title: `Change user privileges`
-               },
-               {
-                  id: 3,
-                  title: `Dump db to file`
-               }
-            ]
-         },
-         {
-            id: 2,
-            title: `PostgreSQL`,
-            subsections: []
-         },
-         {
-            id: 3,
-            title: `NginX`,
-            subsections: [
-               {
-                  id: 1,
-                  title: `Setup proxy server`
-               },
-               {
-                  id: 2,
-                  title: `SSL adding`
-               },
-               {
-                  id: 3,
-                  title: `Standard setup file`
-               },
-               {
-                  id: 4,
-                  title: `Certbot setup`
-               },
-            ]
-         },
-      ]
-   }
+const SideMenu = props => {
+   const { sections } = props;
+
+   const activeSectionId = useSelector(state => `1`);
+   const activeSubectionId = useSelector(state => `1`);
 
    return (
       <ul className={s.sideMenuBox}>
          {
             sections.map(section => {
                return (
-                  <li key={section.id} className={s.sectionBox}>
-                     <p>{section.title}</p>
-                     {
-                        section.subsections.length > 0 &&
-                        <ul>
-                           {
-                              section.subsections.map(subsection => {
-                                 return (
-                                    <li key={subsection.id}>
-                                       <Link to={`/post/${subsection.id}`}>{subsection.title}</Link>
-                                    </li>
-                                 )
-                              })
-                           }
-                        </ul>
-                     }
+                  <li key={section.id} className={section.id === activeSectionId ? s.activeSection : null}>
+                     <div>
+                        <img src={arrow} alt="Arrow down" />
+                        <div className={s.dot}></div>
+                        <p>{section.title}</p>
+                     </div>
+
+                     <ul className={s.subsectionBox}>
+                        {
+                           section.subsections.map(subsection => {
+                              return (
+                                 <li key={subsection.id} className={subsection.id === activeSubectionId ? s.activeSubsection : null}>
+                                    <Link to={`/post/${subsection.id}`}>{subsection.title}</Link>
+                                 </li>
+                              )
+                           })
+                        }
+                     </ul>
                   </li>
                )
             })
@@ -84,8 +42,15 @@ const index = props => {
    )
 }
 
-index.propTypes = {
-
+SideMenu.propTypes = {
+   sections: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      subsections: PropTypes.arrayOf(PropTypes.shape({
+         id: PropTypes.string.isRequired,
+         title: PropTypes.string.isRequired
+      })).isRequired
+   })).isRequired
 }
 
-export default index
+export default SideMenu
