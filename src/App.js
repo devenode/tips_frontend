@@ -18,12 +18,12 @@ const App = props => {
 
             <Route path="/*" element={<WithMenuLayout />}>
                <Route index element={<Post />} />
-               <Route path="post/:id" element={<Post />} />
+               <Route path="post/:postId" element={<Post />} />
             </Route>
 
             <Route path="/*" element={<NoMenuLayout />}>
                <Route path="create-post" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
-               <Route path="edit-post/:id" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
+               <Route path="edit-post/:postId" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
                <Route path="*" element={<Error404 />} />
             </Route>
 

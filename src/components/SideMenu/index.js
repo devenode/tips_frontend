@@ -1,34 +1,65 @@
-import PropTypes from 'prop-types';
 import s from './styles.module.css';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import arrow from '../../icons/arrow-down.svg';
-
+import { getSideMenu, setActiveSection } from '../../actions/sideMenu';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const SideMenu = props => {
-   const { sections } = props;
+   let { postId: chosenPostId } = useParams();
 
-   const activeSectionId = useSelector(state => `1`);
-   const activeSubectionId = useSelector(state => `1`);
+   const { isLoading, error, sections, activeSectionId, firstPostId } = useSelector(state => state.sideMenu);
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      dispatch(getSideMenu());
+   }, [dispatch]);
+
+   const handleSectionClick = e => {
+      if (activeSectionId === e.target.id) {
+         dispatch(setActiveSection(null));
+         return;
+      }
+      dispatch(setActiveSection(e.target.id));
+   }
+
+   if (!chosenPostId) {
+      chosenPostId = firstPostId;
+   }
+
+   if (isLoading) {
+      return (
+         <div>Side menu is loading...</div>
+      )   
+   }
+
+   if (error) {
+      return (
+         <div>Side menu error: {error}</div>
+      )   
+   }
 
    return (
       <ul className={s.sideMenuBox}>
          {
             sections.map(section => {
                return (
-                  <li key={section.id} className={section.id === activeSectionId ? s.activeSection : null}>
+                  <li key={section.id} className={section.id === activeSectionId ? s.activeSection : null}
+                  >
                      <div>
                         <img src={arrow} alt="Arrow down" />
                         <div className={s.dot}></div>
-                        <p>{section.title}</p>
+                        <p id={section.id} onClick={handleSectionClick} >{section.title}</p>
                      </div>
 
-                     <ul className={s.subsectionBox}>
+                     <ul className={s.postsBox}>
                         {
-                           section.subsections.map(subsection => {
+                           section.posts.map(post => {
                               return (
-                                 <li key={subsection.id} className={subsection.id === activeSubectionId ? s.activeSubsection : null}>
-                                    <Link to={`/post/${subsection.id}`}>{subsection.title}</Link>
+                                 <li key={post.id} className={post.id === chosenPostId ? s.activeSubsection : null}
+                                 >
+                                    <Link to={`/post/${post.id}`}>{post.title}</Link>
                                  </li>
                               )
                            })
@@ -40,17 +71,6 @@ const SideMenu = props => {
          }
       </ul>
    )
-}
-
-SideMenu.propTypes = {
-   sections: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      subsections: PropTypes.arrayOf(PropTypes.shape({
-         id: PropTypes.string.isRequired,
-         title: PropTypes.string.isRequired
-      })).isRequired
-   })).isRequired
 }
 
 export default SideMenu

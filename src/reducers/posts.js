@@ -1,4 +1,8 @@
-import { POSTS_LOADING, POSTS_ERROR, POSTS_SET } from '../actions/posts';
+import { 
+   POSTS_LOADING,
+   POSTS_ERROR,
+   POSTS_SET
+} from '../actions/posts';
 
 const initState = {
    isLoading: true,

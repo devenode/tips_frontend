@@ -22,18 +22,18 @@
    display: flex;
    align-items: center;
 }
-.subsectionBox {
+.postsBox {
    padding: 8px 0 8px 30px;
    border-left: 2px solid #fff;
 }
-.subsectionBox > li {
+.postsBox > li {
    display: none;
    margin: 0 0 11px 0;
 }
-.subsectionBox > li:last-of-type {
+.postsBox > li:last-of-type {
    margin: 0;
 }
-.subsectionBox > li > a {
+.postsBox > li > a {
    color: #A1A9B8;
    font-size: .85rem;
    text-decoration: none;
@@ -43,18 +43,18 @@
    overflow: hidden;
    text-overflow: ellipsis;
 }
-.subsectionBox > li > a:hover,
+.postsBox > li > a:hover,
 .sideMenuBox > li > div > p:hover,
 li.activeSubsection > a {
    color: #1B1B1B;
    font-weight: 700;
 }
-.activeSection > .subsectionBox {
+.activeSection > .postsBox {
    padding-top: 15px;
    padding-bottom: 15px;
    border-left: 2px solid #E9EDF4;
 }
-.activeSection > .subsectionBox > li {
+.activeSection > .postsBox > li {
    display: block;
 }
 .activeSection > div > .dot {

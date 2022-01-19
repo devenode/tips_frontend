@@ -9,16 +9,16 @@ export const getPosts = url => {
          const posts = await response.json();
 
          dispatch(setPosts(posts));
-         dispatch(loadPosts(false));
+         dispatch(isPostsLoading(false));
          
       } catch (error) {
-         dispatch(loadPosts(false));
          dispatch(setPostsError(error.message));
+         dispatch(isPostsLoading(false));
       }
    }
 }
 
-export const loadPosts = isLoading => {
+export const isPostsLoading = isLoading => {
    return {
       type: POSTS_LOADING,
       isLoading
