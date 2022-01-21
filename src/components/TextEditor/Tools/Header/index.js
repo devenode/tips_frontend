@@ -1,4 +1,4 @@
-export const TextType = () => {
+export const Header = () => {
    return (
       <div>
          

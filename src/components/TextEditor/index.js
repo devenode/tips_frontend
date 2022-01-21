@@ -1,25 +1,29 @@
-import { useState, useMemo } from 'react';
-import { createEditor } from 'slate';
-import { Slate, Editable, withReact } from 'slate-react';
-import { withHistory } from 'slate-history';
+import { useCallback } from 'react';
+import { Editable } from 'slate-react';
+import Code from './Blocks/Code';
+import Paragraph from './Blocks/Paragraph';
 
-const TextEditor = () => {
-   const editor = useMemo(() => withReact(withHistory(createEditor())), [])
-   const [value, setValue] = useState([
-      {
-         type: `paragraph`,
-         children: [{ text: `A line of text in a paragraph.` }],
-      },
-   ])
+const TextEditor = props => {
+   const renderElement = useCallback(props => {
+      switch (props.element.type) {
+         case `code`:
+            return <Code {...props} />
+         default:
+            return <Paragraph {...props} />
+      }
+   }, []);
+
+   const onKeyDown = useCallback(e => {
+      console.log(e.key);
+   }, []);
+
+
 
    return (
-      <Slate
-         editor={editor}
-         value={value}
-         onChange={newValue => setValue(newValue)}
-      >
-         <Editable />
-      </Slate>
+      <Editable
+         renderElement={renderElement}
+         onKeyDown={onKeyDown}
+      />
    )
 }
 

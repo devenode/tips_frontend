@@ -6,31 +6,34 @@ import WithMenuLayout from './layouts/WithMenuLayout';
 import NoMenuLayout from './layouts/NoMenuLayout';
 import Error404 from './pages/Error404';
 import Post from './components/Post';
+import SlateContext from './components/TextEditor/context';
 const EditPost = React.lazy(() => import('./pages/EditPost'));
 
 
 
 
-const App = props => {
+const App = () => {
    return (
-      <Routes>
-         <Route path="/*" element={<MainLayout />}>
+      <SlateContext>
+         <Routes>
+            <Route path="/*" element={<MainLayout />}>
 
-            <Route path="/*" element={<WithMenuLayout />}>
-               <Route index element={<Post />} />
-               <Route path="post/:postId" element={<Post />} />
+               <Route path="/*" element={<WithMenuLayout />}>
+                  <Route index element={<Post />} />
+                  <Route path="post/:postId" element={<Post />} />
+               </Route>
+
+               <Route path="/*" element={<NoMenuLayout />}>
+                  <Route path="edit-post" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
+                  <Route path="edit-post/:postId" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
+                  <Route path="*" element={<Error404 />} />
+               </Route>
+
             </Route>
-
-            <Route path="/*" element={<NoMenuLayout />}>
-            <Route path="edit-post" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
-               <Route path="edit-post/:postId" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
-               <Route path="*" element={<Error404 />} />
-            </Route>
-
-         </Route>
-      </Routes>
+         </Routes>
+      </SlateContext>
    )
 }
 
 
-export default App
+export default App;

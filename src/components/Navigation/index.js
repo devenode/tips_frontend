@@ -1,10 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Logo from '../Logo';
 import Search from '../Search';
-import EditTextPanel from '../EditTextPanel';
+import StyleTextPanel from '../StyleTextPanel';
 import BlueButton from '../BlueButton';
 import s from './styles.module.css';
-import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -18,7 +19,7 @@ const Navigation = props => {
 
             <Routes>
                <Route path="/*" element={<Search />} />
-               <Route path="/*" element={<EditTextPanel />}>
+               <Route path="/*" element={<StyleTextPanel />}>
                   <Route path="edit-post" element={<></>} />
                </Route>
             </Routes>
@@ -35,4 +36,4 @@ const Navigation = props => {
 }
 
 
-export default Navigation
+export default Navigation;

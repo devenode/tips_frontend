@@ -2,7 +2,9 @@ import { Outlet } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 
 
+
 const MainLayout = props => {
+
    return (
       <>
          <Navigation />
@@ -14,4 +16,4 @@ const MainLayout = props => {
 }
 
 
-export default MainLayout
+export default MainLayout;
