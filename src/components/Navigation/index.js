@@ -18,19 +18,14 @@ const Navigation = props => {
 
             <Routes>
                <Route path="/*" element={<Search />} />
-
                <Route path="/*" element={<EditTextPanel />}>
-                  <Route path="create-post" element={<></>} />
-                  <Route path="edit-post/:id" element={<></>} />
+                  <Route path="edit-post" element={<></>} />
                </Route>
             </Routes>
 
             <Routes>
-               <Route path="/*" element={<BlueButton title="Add new tip" handleClick={() => navigate(`/create-post`)} />} />
-
-               {/* TO DO - create Client api for posts */}
+               <Route path="/*" element={<BlueButton title="Add new tip" handleClick={() => navigate(`/edit-post`)} />} />
                <Route path="/*" element={<BlueButton title="Save" handleClick={() => null} />}>
-                  <Route path="create-post" element={<></>} />
                   <Route path="edit-post/:id" element={<></>} />
                </Route>
             </Routes>

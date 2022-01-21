@@ -22,7 +22,7 @@ const App = props => {
             </Route>
 
             <Route path="/*" element={<NoMenuLayout />}>
-               <Route path="create-post" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
+            <Route path="edit-post" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
                <Route path="edit-post/:postId" element={<Suspense fallback={<PageLoader />}><EditPost /></Suspense>} />
                <Route path="*" element={<Error404 />} />
             </Route>

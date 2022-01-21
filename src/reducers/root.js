@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { mainSearch } from './mainSearch';
-import { posts } from './posts';
+import { post } from './post';
 import { sideMenu } from './sideMenu';
 
 
 
 export const rootReducer = combineReducers({
    mainSearch,
-   posts,
+   post,
    sideMenu
 });

@@ -1,0 +1,8 @@
+.textPanelBox {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.textPanelBox > div {
+   margin: 0 25px 0 0;
+}
