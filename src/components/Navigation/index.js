@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Logo from '../Logo';
 import Search from '../Search';
-import StyleTextPanel from '../StyleTextPanel';
+import StylePanel from '../TextEditor/StylePanel';
 import BlueButton from '../BlueButton';
 import s from './styles.module.css';
 
@@ -19,7 +19,7 @@ const Navigation = props => {
 
             <Routes>
                <Route path="/*" element={<Search />} />
-               <Route path="/*" element={<StyleTextPanel />}>
+               <Route path="/*" element={<StylePanel />}>
                   <Route path="edit-post" element={<></>} />
                </Route>
             </Routes>
