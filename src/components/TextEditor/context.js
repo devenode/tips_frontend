@@ -2,9 +2,10 @@ import { useState, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
+import withInlines from './withInlines';
 
 const SlateContext = ({ children }) => {
-   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
+   const editor = useMemo(() => withInlines(withReact(withHistory(createEditor()))), []);
    const [value, setValue] = useState([
       {
          type: `paragraph`,

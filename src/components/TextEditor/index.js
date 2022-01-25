@@ -7,7 +7,7 @@ import Block from './Block';
 const TextEditor = props => {
    const renderElement = useCallback(props => <Block {...props} />, []);
    const renderLeaf = useCallback(props => <Leaf {...props} />, []);
-   const onKeyDown = useCallback(e => {console.log(e.key)}, []);
+   const onKeyDown = useCallback(e => {}, []);
 
 
    return (

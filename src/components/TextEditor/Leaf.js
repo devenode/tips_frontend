@@ -11,6 +11,10 @@ const Leaf = ({ attributes, children, leaf }) => {
       children = <u>{children}</u>
    }
 
+   if (leaf.strike) {
+      children = <strike>{children}</strike>
+   }
+
    return <span {...attributes}>{children}</span>
 }
 
