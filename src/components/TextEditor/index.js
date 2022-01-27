@@ -1,14 +1,16 @@
 import { useCallback } from 'react';
-import { Editable } from 'slate-react';
+import { Editable, useSlate } from 'slate-react';
 import Leaf from './Leaf';
 import Block from './Block';
+import { stepInOutFromInline } from './withInlines';
 
 
 const TextEditor = props => {
+   const editor = useSlate();
+
    const renderElement = useCallback(props => <Block {...props} />, []);
    const renderLeaf = useCallback(props => <Leaf {...props} />, []);
-   const onKeyDown = useCallback(e => {}, []);
-
+   const onKeyDown = useCallback(e => stepInOutFromInline(editor, e), [editor]);
 
    return (
       <Editable

@@ -1,3 +1,5 @@
+import { Range, Transforms } from 'slate';
+import { isKeyHotkey } from 'is-hotkey';
 import { toggleLink } from './LinkButton';
 import isUrl from 'is-url';
 
@@ -8,6 +10,8 @@ export const withInlines = editor => {
       [`link`].includes(element.type) || isInline(element);
 
    editor.insertText = text => {
+      if (!text.length) return;
+
       if (text && isUrl(text)) {
          toggleLink(editor, text);
       } else {
@@ -20,12 +24,44 @@ export const withInlines = editor => {
 
       if (text && isUrl(text)) {
          toggleLink(editor, text);
+
+      } else if (text) {
+         const noEmptyStrings = text.split(`\n`).filter(str => str.length);
+         const dataTrans = new DataTransfer();
+         dataTrans.setData(`text/plain`, noEmptyStrings.join(`\n`));         
+         insertData(dataTrans);
+
       } else {
          insertData(data);
       }
    }
 
    return editor;
+}
+
+export const stepInOutFromInline = (editor, e) => {
+   // Default left/right behavior is unit:'character'.
+   // This fails to distinguish between two cursor positions, such as
+   // <inline>foo<cursor/></inline> vs <inline>foo</inline><cursor/>.
+   // Here we modify the behavior to unit:'offset'.
+   // This lets the user step into and out of the inline without stepping over characters.
+   // You may wish to customize this further to only use unit:'offset' in specific cases.
+
+   const { selection } = editor;
+
+   if (selection && Range.isCollapsed(selection)) {
+      const { nativeEvent } = e;
+      if (isKeyHotkey(`left`, nativeEvent)) {
+         e.preventDefault();
+         Transforms.move(editor, { unit: `offset`, reverse: true });
+         return;
+      }
+      if (isKeyHotkey(`right`, nativeEvent)) {
+         e.preventDefault();
+         Transforms.move(editor, { unit: `offset` });
+         return;
+      }
+   }
 }
 
 export default withInlines;
