@@ -15,11 +15,13 @@ export const StylePanel = () => {
 
          
          {/*
-            text align
-            header type
             drop down
+            header type
+            blockquote
          */}
-
+         <BlockButton format="paragraph" textAlign="left"/>
+         <BlockButton format="paragraph" textAlign="center"/>
+         <BlockButton format="paragraph" textAlign="right"/>
          
          <BlockButton format="bulleted-list" />
          <BlockButton format="numbered-list" />

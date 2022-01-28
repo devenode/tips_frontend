@@ -1,6 +1,7 @@
 import { useSlate } from 'slate-react';
 import { Editor, Transforms, Element, Range } from 'slate';
 import TAGS from './elements';
+import isUrl from 'is-url';
 
 export const LinkButton = () => {
    const editor = useSlate();
@@ -31,6 +32,11 @@ export const toggleLink = (editor, url) => {
 
    url = url || window.prompt(`Enter the URL of the link:`);
    if (!url) return;
+
+   if (!isUrl(url)) {
+      alert(`It doens't look like valid URL`);
+      return;
+   }
 
    const isCollapsed = selection && Range.isCollapsed(selection);
    const link = {

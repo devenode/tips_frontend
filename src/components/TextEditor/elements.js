@@ -13,8 +13,6 @@ const TAGS = {
    UL: `bulleted-list`,
    OL: `numbered-list`,
    CODE: `code`,
-   // TO DO text align
-   // TO DO hotkeys
 }
 
 export default TAGS;

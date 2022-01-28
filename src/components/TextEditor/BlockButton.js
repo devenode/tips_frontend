@@ -3,20 +3,21 @@ import { Editor, Element, Transforms } from 'slate';
 import TAGS from './elements';
 const LIST_TYPES = [TAGS.OL, TAGS.UL];
 
-export const BlockButton = ({ format }) => {
+export const BlockButton = props => {
+   const { format } = props;
    const editor = useSlate();
 
    return (
       <button
          active={isBlockActive(editor, format).toString()}
-         onClick={e => toggleBlock(editor, format)}
+         onClick={e => toggleBlock(editor, props)}
       >
          {format}
       </button>
    )
 }
 
-const toggleBlock = (editor, format) => {
+const toggleBlock = (editor, { format, textAlign }) => {
    const isActive = isBlockActive(editor, format);
    const isList = LIST_TYPES.includes(format);
 
@@ -30,6 +31,10 @@ const toggleBlock = (editor, format) => {
 
    const newProperties = {
       type: isActive ? TAGS.P : isList ? TAGS.LI : format,
+   }
+
+   if (textAlign) {
+      newProperties.textAlign = textAlign;
    }
 
    Transforms.setNodes(editor, newProperties);

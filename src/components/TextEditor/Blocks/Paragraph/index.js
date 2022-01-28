@@ -1,5 +1,8 @@
 export const Paragraph = props => {
-   return <p {...props.attributes}>{props.children}</p>
+   const { textAlign } = props.element;
+   return <p {...props.attributes} style={{ textAlign }}>
+      {props.children}
+   </p>
 }
 
 export default Paragraph;
