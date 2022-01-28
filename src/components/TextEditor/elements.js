@@ -8,11 +8,13 @@ const TAGS = {
    H4: `heading-four`,
    H5: `heading-five`,
    H6: `heading-six`,
-   IMG: `image`,
    LI: `list-item`,
    UL: `bulleted-list`,
    OL: `numbered-list`,
    CODE: `code`,
+   IMG: `image`,
+   IFRAME: `iframe`,
+   TABLE: `table`,
 }
 
 export default TAGS;

@@ -17,9 +17,32 @@ export const BlockButton = props => {
    )
 }
 
-const toggleBlock = (editor, { format, textAlign }) => {
+const toggleBlock = (editor, { format, align }) => {
    const isActive = isBlockActive(editor, format);
    const isList = LIST_TYPES.includes(format);
+
+   const newProperties = {
+      type: isActive ? TAGS.P : isList ? TAGS.LI : format,
+   }
+
+   if (!format && align) {
+      const { selection } = editor;
+      if (!selection) return;
+
+      const currentNode = editor.children[selection.anchor.path[0]];
+
+      const allowedNodes = [
+         TAGS.P,
+         TAGS.H1,
+         TAGS.H2,
+         TAGS.H3,
+      ]
+      if (allowedNodes.includes(currentNode.type)) {
+         newProperties.type = currentNode.type;
+         newProperties.children = currentNode.children;
+         newProperties.align = align;
+      } else return;
+   }
 
    Transforms.unwrapNodes(editor, {
       match: n =>
@@ -28,14 +51,6 @@ const toggleBlock = (editor, { format, textAlign }) => {
          LIST_TYPES.includes(n.type),
       split: true,
    });
-
-   const newProperties = {
-      type: isActive ? TAGS.P : isList ? TAGS.LI : format,
-   }
-
-   if (textAlign) {
-      newProperties.textAlign = textAlign;
-   }
 
    Transforms.setNodes(editor, newProperties);
 

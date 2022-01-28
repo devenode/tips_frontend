@@ -1,9 +1,24 @@
 .editorBox {
    font-size: 1.15rem;
-   line-height: 1.8rem;
+}
+.editorBox h1,
+.editorBox h2,
+.editorBox h3 {
+   margin-bottom: 18px;
+   font-weight: 400;
+}
+.editorBox h1 {
+   font-size: 2.25rem;
+}
+.editorBox h2 {
+   font-size: 1.65rem;
+}
+.editorBox h3 {
+   font-size: 1.35rem;
 }
 .editorBox p {
    margin-bottom: 18px;
+   line-height: 1.8rem;
 }
 .editorBox ul {
    list-style: initial;
@@ -16,4 +31,6 @@
 }
 .editorBox li {
    padding-left: 8px;
+   margin-bottom: 8px;
+   line-height: 1.8rem;
 }

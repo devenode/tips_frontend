@@ -2,6 +2,7 @@ import StyleButton from '../StyleButton';
 import BlockButton from '../BlockButton';
 import LinkButton from '../LinkButton';
 import s from './styles.module.css';
+import TAGS from '../elements';
 
 export const StylePanel = () => {
 
@@ -16,19 +17,24 @@ export const StylePanel = () => {
          
          {/*
             drop down
-            header type
             blockquote
          */}
-         <BlockButton format="paragraph" textAlign="left"/>
-         <BlockButton format="paragraph" textAlign="center"/>
-         <BlockButton format="paragraph" textAlign="right"/>
+         <BlockButton format={TAGS.BLOCKQUOTE}/>
+
+         <BlockButton format={TAGS.H1}/>
+         <BlockButton format={TAGS.H2}/>
+         <BlockButton format={TAGS.H3}/>
+
+         <BlockButton align="left"/>
+         <BlockButton align="center"/>
+         <BlockButton align="right"/>
          
-         <BlockButton format="bulleted-list" />
-         <BlockButton format="numbered-list" />
-         <BlockButton format="code" />
-         <BlockButton format="image" />
-         <BlockButton format="video-youtube" />
-         <BlockButton format="table" />
+         <BlockButton format={TAGS.UL} />
+         <BlockButton format={TAGS.OL} />
+         <BlockButton format={TAGS.CODE} />
+         <BlockButton format={TAGS.IMG} />
+         <BlockButton format={TAGS.IFRAME} />
+         <BlockButton format={TAGS.TABLE} />
       </div>
    )
 }
