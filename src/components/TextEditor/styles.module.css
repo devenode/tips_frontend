@@ -1,0 +1,19 @@
+.editorBox {
+   font-size: 1.15rem;
+   line-height: 1.8rem;
+}
+.editorBox p {
+   margin-bottom: 18px;
+}
+.editorBox ul {
+   list-style: initial;
+   margin-left: 55px;
+   margin-bottom: 18px;
+}
+.editorBox ol {
+   margin-left: 55px;
+   margin-bottom: 18px;
+}
+.editorBox li {
+   padding-left: 8px;
+}

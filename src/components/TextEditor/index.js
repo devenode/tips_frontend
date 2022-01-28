@@ -3,6 +3,7 @@ import { Editable, useSlate } from 'slate-react';
 import Leaf from './Leaf';
 import Block from './Block';
 import { stepInOutFromInline } from './withInlines';
+import s from './styles.module.css';
 
 
 const TextEditor = props => {
@@ -13,14 +14,16 @@ const TextEditor = props => {
    const onKeyDown = useCallback(e => stepInOutFromInline(editor, e), [editor]);
 
    return (
-      <Editable
-         spellCheck
-         autoFocus
-         placeholder="New paragraph…"
-         renderElement={renderElement}
-         onKeyDown={onKeyDown}
-         renderLeaf={renderLeaf}
-      />
+      <div className={s.editorBox}>
+         <Editable
+            spellCheck
+            autoFocus
+            placeholder="New paragraph…"
+            renderElement={renderElement}
+            onKeyDown={onKeyDown}
+            renderLeaf={renderLeaf}
+         />
+      </div>
    )
 }
 
