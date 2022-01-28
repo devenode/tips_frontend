@@ -1,6 +1,7 @@
 import { useSlate } from 'slate-react';
 import { Editor, Element, Transforms } from 'slate';
-const LIST_TYPES = [`numbered-list`, `bulleted-list`];
+import TAGS from './elements';
+const LIST_TYPES = [TAGS.OL, TAGS.UL];
 
 export const BlockButton = ({ format }) => {
    const editor = useSlate();
@@ -28,7 +29,7 @@ const toggleBlock = (editor, format) => {
    });
 
    const newProperties = {
-      type: isActive ? `paragraph` : isList ? `list-item` : format,
+      type: isActive ? TAGS.P : isList ? TAGS.LI : format,
    }
 
    Transforms.setNodes(editor, newProperties);

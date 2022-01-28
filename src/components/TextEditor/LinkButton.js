@@ -1,5 +1,6 @@
 import { useSlate } from 'slate-react';
 import { Editor, Transforms, Element, Range } from 'slate';
+import TAGS from './elements';
 
 export const LinkButton = () => {
    const editor = useSlate();
@@ -33,7 +34,7 @@ export const toggleLink = (editor, url) => {
 
    const isCollapsed = selection && Range.isCollapsed(selection);
    const link = {
-      type: `link`,
+      type: TAGS.A,
       href: url,
       isBlank: true,
       children: isCollapsed ? [{ text: url }] : [],

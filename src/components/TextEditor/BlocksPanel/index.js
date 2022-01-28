@@ -1,5 +1,6 @@
 import { Editor, Transforms } from 'slate';
 import { useSlate } from 'slate-react';
+import TAGS from '../elements';
 
 
 export const BlocksPanel = props => {
@@ -12,7 +13,7 @@ export const BlocksPanel = props => {
 
       Transforms.setNodes(
          editor,
-         { type: match ? `paragraph` : `code` },
+         { type: match ? TAGS.P : TAGS.CODE },
          { match: node => Editor.isBlock(editor, node) }
       );
    }

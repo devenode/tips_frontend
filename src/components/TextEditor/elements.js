@@ -1,27 +1,18 @@
-const ELEMENT_TAGS = {
-   A: el => ({ type: 'link', href: el.getAttribute('href') }),
-   BLOCKQUOTE: () => ({ type: 'quote' }),
-   H1: () => ({ type: 'heading-one' }),
-   H2: () => ({ type: 'heading-two' }),
-   H3: () => ({ type: 'heading-three' }),
-   H4: () => ({ type: 'heading-four' }),
-   H5: () => ({ type: 'heading-five' }),
-   H6: () => ({ type: 'heading-six' }),
-   IMG: el => ({ type: 'image', url: el.getAttribute('src') }),
-   LI: () => ({ type: 'list-item' }),
-   OL: () => ({ type: 'numbered-list' }),
-   P: () => ({ type: 'paragraph' }),
-   PRE: () => ({ type: 'code' }),
-   UL: () => ({ type: 'bulleted-list' }),
+const TAGS = {
+   P: `paragraph`,
+   A: `link`,
+   BLOCKQUOTE: `quote`,
+   H1: `heading-one`,
+   H2: `heading-two`,
+   H3: `heading-three`,
+   H4: `heading-four`,
+   H5: `heading-five`,
+   H6: `heading-six`,
+   IMG: `image`,
+   LI: `list-item`,
+   UL: `bulleted-list`,
+   OL: `numbered-list`,
+   CODE: `code`,
 }
 
-// COMPAT: `B` is omitted here because Google Docs uses `<b>` in weird ways.
-const TEXT_TAGS = {
-   CODE: () => ({ code: true }),
-   DEL: () => ({ strikethrough: true }),
-   EM: () => ({ italic: true }),
-   I: () => ({ italic: true }),
-   S: () => ({ strikethrough: true }),
-   STRONG: () => ({ bold: true }),
-   U: () => ({ underline: true }),
-}
+export default TAGS;

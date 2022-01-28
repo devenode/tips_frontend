@@ -3,12 +3,13 @@ import { createEditor } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import withInlines from './withInlines';
+import TAGS from './elements';
 
 const SlateContext = ({ children }) => {
    const editor = useMemo(() => withInlines(withReact(withHistory(createEditor()))), []);
    const [value, setValue] = useState([
       {
-         type: `paragraph`,
+         type: TAGS.P,
          children: [{ text: `` }],
       },
    ]);
