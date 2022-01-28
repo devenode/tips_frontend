@@ -7,6 +7,7 @@ import Paragraph from './Blocks/Paragraph';
 import H1 from './Blocks/H1';
 import H2 from './Blocks/H2';
 import H3 from './Blocks/H3';
+import Blockquote from './Blocks/Blockquote';
 import TAGS from './elements';
 
 
@@ -35,6 +36,9 @@ const Block = props => {
 
       case TAGS.H3:
          return <H3 {...props} />
+
+      case TAGS.BLOCKQUOTE:
+         return <Blockquote {...props} />
 
       default:
          return <Paragraph {...props} />

@@ -3,6 +3,7 @@ html {
    padding: 0;
    box-sizing: border-box;
 }
+
 body {
    margin: 0;
    padding: 0;
@@ -16,10 +17,12 @@ body {
    -webkit-tap-highlight-color: #3A3A3A;
    -webkit-tap-highlight-color: transparent;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
    display: none
 }
+
 input {
    appearance: none;
    font-size: 1rem;
@@ -37,21 +40,25 @@ input {
    -webkit-appearance: none;
    -moz-appearance: none;
 }
+
 input::placeholder {
    font-family: 'PT Sans', sans-serif;
    font-weight: 400;
    color: #A1A9B8;
 }
+
 input:focus {
    outline: none;
    box-shadow: 0 0 0 3px #C6E2FF;
    border: 1px solid #A5CFFA;
 }
+
 input:disabled,
 input:read-only {
    background: #EFF5F9;
    color: #6A7486;
 }
+
 select {
    appearance: none;
    font-size: 1rem;
@@ -69,14 +76,17 @@ select {
    -webkit-appearance: none;
    -moz-appearance: none;
 }
+
 select:focus {
    outline: none;
    box-shadow: 0 0 0 3px #C6E2FF;
    border: 1px solid #A5CFFA;
 }
+
 img {
    display: block;
 }
+
 img,
 ul,
 ol,
@@ -95,9 +105,11 @@ h4 {
    padding: 0;
    box-sizing: border-box
 }
+
 ul {
    list-style: none
 }
+
 textarea {
    display: block;
    resize: none;
@@ -110,6 +122,7 @@ textarea {
    transition: box-shadow .2s ease;
    -webkit-appearance: none;
 }
+
 textarea::-webkit-input-placeholder,
 textarea::-moz-placeholder,
 textarea:-ms-input-placeholder,
@@ -118,11 +131,13 @@ textarea::placeholder {
    font-weight: 400;
    color: #A1A9B8;
 }
+
 textarea:focus {
    outline: none;
    box-shadow: 0 0 0 3px #C6E2FF;
    border: 1px solid #A5CFFA;
 }
+
 button {
    position: relative;
    display: block;
@@ -133,73 +148,90 @@ button {
    color: #fff;
    cursor: pointer;
 }
+
 button:focus {
    box-shadow: 0 0 0 3px #C6E2FF;
    border: 1px solid #A5CFFA;
 }
+
 a {
    color: #1366F4;
    outline: none;
    text-decoration: underline;
 }
+
 a:hover {
    color: #0F51C4;
 }
+
 #root {
    outline: none;
 }
+
 .noselect {
    user-select: none;
-   -webkit-touch-callout: none; 
-   -webkit-user-select: none; 
-   -khtml-user-select: none; 
-   -moz-user-select: none; 
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
    -ms-user-select: none;
 }
+
 .ellipsis {
    display: block;
    white-space: nowrap;
    overflow: hidden;
    text-overflow: ellipsis;
 }
+
 .hrz-scroll {
    overflow-x: scroll;
    -webkit-overflow-scrolling: touch;
 }
+
 .hrz-scroll::-webkit-scrollbar {
    display: none;
 }
+
 .hide-scrollbar {
    -ms-overflow-style: none;
    scrollbar-width: none;
 }
+
 .content {
    width: 100%;
    max-width: 1000px;
    margin: 0 auto;
    padding: 0 15px;
 }
+
 .nav-margin {
    margin-top: 115px;
 }
+
 .input-box {
    position: relative;
 }
-.input-box > img {
+
+.input-box>img {
    position: absolute;
    top: 13px;
    left: 13px;
 }
+
 .two-clmns {
    display: flex;
 }
-.two-clmns > div:first-of-type {
+
+.two-clmns>div:first-of-type {
    flex-basis: calc(27% - 20px);
    margin: 0 20px 0 0;
 }
-.two-clmns > div:last-of-type {
+
+.two-clmns>div:last-of-type {
    flex-basis: 73%;
 }
+
 .one-clmn {
    max-width: 700px;
    margin: 0 auto;

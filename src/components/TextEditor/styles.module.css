@@ -1,36 +1,62 @@
 .editorBox {
    font-size: 1.15rem;
 }
+
 .editorBox h1,
 .editorBox h2,
 .editorBox h3 {
    margin-bottom: 18px;
    font-weight: 400;
 }
+
 .editorBox h1 {
    font-size: 2.25rem;
 }
+
 .editorBox h2 {
    font-size: 1.65rem;
 }
+
 .editorBox h3 {
    font-size: 1.35rem;
 }
+
 .editorBox p {
    margin-bottom: 18px;
    line-height: 1.8rem;
 }
+
 .editorBox ul {
    list-style: initial;
    margin-left: 55px;
    margin-bottom: 18px;
 }
+
 .editorBox ol {
    margin-left: 55px;
    margin-bottom: 18px;
 }
+
 .editorBox li {
    padding-left: 8px;
    margin-bottom: 8px;
    line-height: 1.8rem;
+}
+
+.editorBox blockquote {
+   background: #f9f9f9;
+   border-left: 5px solid #e5e5e5;
+   margin: 25px 20px;
+   padding: 15px;
+   quotes: "\201C""\201D";
+   line-height: 1.8rem;
+}
+
+.editorBox blockquote:before {
+   color: #ccc;
+   content: open-quote;
+   font-size: 3rem;
+   line-height: 0.1rem;
+   margin-right: 15px;
+   vertical-align: -0.4em;
 }
