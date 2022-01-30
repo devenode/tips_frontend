@@ -6,7 +6,6 @@ import { stepInOutFromInline } from './withInlines';
 import { handleHotkeyPress } from './hotkeys';
 import s from './styles.module.css';
 
-
 const TextEditor = props => {
    const editor = useSlate();
 

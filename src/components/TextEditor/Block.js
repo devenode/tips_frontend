@@ -1,4 +1,4 @@
-import Code from './Blocks/Code';
+import Preformatted from './Blocks/Preformatted';
 import BulletedList from './Blocks/BulletedList';
 import NumberedList from './Blocks/NumberedList';
 import ListItem from './Blocks/ListItem';
@@ -10,11 +10,10 @@ import H3 from './Blocks/H3';
 import Blockquote from './Blocks/Blockquote';
 import TAGS from './elements';
 
-
 const Block = props => {
    switch (props.element.type) {
-      case TAGS.CODE:
-         return <Code {...props} />
+      case TAGS.PRE:
+         return <Preformatted {...props} />
 
       case TAGS.UL:
          return <BulletedList {...props} />

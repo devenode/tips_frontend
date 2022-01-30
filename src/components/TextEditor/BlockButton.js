@@ -20,9 +20,13 @@ export const BlockButton = props => {
 const toggleBlock = (editor, { format, align }) => {
    const isActive = isBlockActive(editor, format);
    const isList = LIST_TYPES.includes(format);
+   const isPre = format === TAGS.PRE;
 
    const newProperties = {
-      type: isActive ? TAGS.P : isList ? TAGS.LI : format,
+      type: isActive ? TAGS.P :
+            isList ? TAGS.LI :
+            isPre ? TAGS.P :
+            format
    }
 
    if (!format && align) {
@@ -48,13 +52,14 @@ const toggleBlock = (editor, { format, align }) => {
       match: n =>
          !Editor.isEditor(n) &&
          Element.isElement(n) &&
-         LIST_TYPES.includes(n.type),
+         (LIST_TYPES.includes(n.type) ||
+         TAGS.PRE === n.type),
       split: true,
    });
 
    Transforms.setNodes(editor, newProperties);
 
-   if (!isActive && isList) {
+   if (!isActive && (isList || isPre)) {
       const block = { type: format, children: [] }
       Transforms.wrapNodes(editor, block);
    }

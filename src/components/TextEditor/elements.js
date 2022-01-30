@@ -11,7 +11,7 @@ const TAGS = {
    LI: `list-item`,
    UL: `bulleted-list`,
    OL: `numbered-list`,
-   CODE: `code`,
+   PRE: `preformatted`,
    IMG: `image`,
    IFRAME: `iframe`,
    TABLE: `table`,

@@ -4,8 +4,21 @@
 
 .editorBox h1,
 .editorBox h2,
-.editorBox h3 {
+.editorBox h3,
+.editorBox p,
+.editorBox ul,
+.editorBox ol,
+.editorBox pre {
    margin-bottom: 18px;
+}
+
+.editorBox pre {
+   margin-top: 18px;
+}
+
+.editorBox h1,
+.editorBox h2,
+.editorBox h3 {
    font-weight: 400;
 }
 
@@ -22,19 +35,16 @@
 }
 
 .editorBox p {
-   margin-bottom: 18px;
    line-height: 1.8rem;
 }
 
 .editorBox ul {
    list-style: initial;
    margin-left: 55px;
-   margin-bottom: 18px;
 }
 
 .editorBox ol {
    margin-left: 55px;
-   margin-bottom: 18px;
 }
 
 .editorBox li {
@@ -59,4 +69,17 @@
    line-height: 0.1rem;
    margin-right: 15px;
    vertical-align: -0.4em;
+}
+
+.editorBox pre {
+   background-color: #F5F5F5;
+   border-radius: 4px;
+   padding: 17px 20px;
+   font-size: .9rem;
+   overflow-x: auto;
+}
+
+.editorBox pre p {
+   margin-bottom: 0;
+   line-height: 1.4rem;
 }

@@ -1,8 +1,9 @@
 import StyleButton from '../StyleButton';
 import BlockButton from '../BlockButton';
 import LinkButton from '../LinkButton';
-import s from './styles.module.css';
 import TAGS from '../elements';
+import s from './styles.module.css';
+
 
 export const StylePanel = () => {
 
@@ -14,24 +15,16 @@ export const StylePanel = () => {
          <StyleButton format="strike" />
          <LinkButton />
 
-         
-         {/*
-            drop down
-            blockquote
-         */}
+         <BlockButton format={TAGS.PRE} />
          <BlockButton format={TAGS.BLOCKQUOTE}/>
-
          <BlockButton format={TAGS.H1}/>
          <BlockButton format={TAGS.H2}/>
          <BlockButton format={TAGS.H3}/>
-
          <BlockButton align="left"/>
          <BlockButton align="center"/>
          <BlockButton align="right"/>
-         
          <BlockButton format={TAGS.UL} />
          <BlockButton format={TAGS.OL} />
-         <BlockButton format={TAGS.CODE} />
          <BlockButton format={TAGS.IMG} />
          <BlockButton format={TAGS.IFRAME} />
          <BlockButton format={TAGS.TABLE} />
