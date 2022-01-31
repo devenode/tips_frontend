@@ -51,13 +51,11 @@ export const stepInOutFromInline = (editor, e) => {
 
    if (selection && Range.isCollapsed(selection)) {
       const { nativeEvent } = e;
-      if (isKeyHotkey(`left`, nativeEvent)) {
-         e.preventDefault();
-         Transforms.move(editor, { unit: `offset`, reverse: true });
+      if (isKeyHotkey(`space`, nativeEvent)) {
+         Transforms.move(editor, { unit: `offset` });
          return;
       }
-      if (isKeyHotkey(`right`, nativeEvent)) {
-         e.preventDefault();
+      if (isKeyHotkey(`enter`, nativeEvent)) {
          Transforms.move(editor, { unit: `offset` });
          return;
       }

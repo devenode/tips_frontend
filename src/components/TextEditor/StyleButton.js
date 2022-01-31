@@ -6,14 +6,22 @@ import underline from '../../icons/underline.svg';
 import strike from '../../icons/strike.svg';
 import s from './StylePanel/styles.module.css';
 
-export const StyleButton = ({ format }) => {
-   const icons = {
-      bold,
-      italic,
-      underline,
-      strike
-   }
 
+export const TEXT_STYLES = {
+   bold: `bold`,
+   italic: `italic`,
+   underline: `underline`,
+   strike: `strike`,
+}
+
+const icons = {
+   bold,
+   italic,
+   underline,
+   strike
+}
+
+export const StyleButton = ({ format }) => {
    const editor = useSlate();
    const isActive = isStyleActive(editor, format);
 
@@ -32,7 +40,7 @@ const isStyleActive = (editor, format) => {
    return marks ? marks[format] === true : false;
 }
 
-const toggleStyle = (editor, format,e ) => {
+const toggleStyle = (editor, format, e) => {
    e.preventDefault();
    const isActive = isStyleActive(editor, format);
 

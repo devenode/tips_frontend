@@ -1,23 +1,62 @@
 import { useSlate } from 'slate-react';
 import { Editor, Element, Transforms } from 'slate';
 import TAGS from './elements';
-const LIST_TYPES = [TAGS.OL, TAGS.UL];
+import s from './StylePanel/styles.module.css';
+import blockquote from '../../icons/blockquote.svg';
+import right from '../../icons/right.svg';
+import center from '../../icons/center.svg';
+import left from '../../icons/left.svg';
+import preformatted from '../../icons/preformatted.svg';
+import numbered_list from '../../icons/numbered_list.svg';
+import bulleted_list from '../../icons/bulleted_list.svg';
+
+
+
+export const TEXT_ALIGN = { 
+   left: `left`,
+   center: `center`,
+   right: `right`
+}
+
+export const LIST_TYPES = [TAGS.OL, TAGS.UL];
+
+export const HEADINGS = [TAGS.H1, TAGS.H2, TAGS.H3];
+
+const icons = {
+   blockquote,
+   right,
+   center,
+   left,
+   preformatted,
+   [`numbered-list`]: numbered_list,
+   [`bulleted-list`]: bulleted_list
+}
 
 export const BlockButton = props => {
    const { format } = props;
    const editor = useSlate();
+   const isActive = isBlockActive(editor, format);
 
    return (
+      HEADINGS.includes(format) ? 
+      
+      <div
+         className={isActive ? s.activeBtn : null}
+         onMouseDown={e => toggleBlock(editor, props, e)}
+      >{format}</div> :
+
       <button
-         active={isBlockActive(editor, format).toString()}
-         onClick={e => toggleBlock(editor, props)}
+         className={isActive ? s.activeBtn : null}
+         onMouseDown={e => toggleBlock(editor, props, e)}
       >
-         {format}
+         <img src={icons[format]} alt={format} />  
       </button>
    )
 }
 
-const toggleBlock = (editor, { format, align }) => {
+const toggleBlock = (editor, { format }, e) => {
+   e.preventDefault();
+
    const isActive = isBlockActive(editor, format);
    const isList = LIST_TYPES.includes(format);
    const isPre = format === TAGS.PRE;
@@ -29,7 +68,7 @@ const toggleBlock = (editor, { format, align }) => {
             format
    }
 
-   if (!format && align) {
+   if (TEXT_ALIGN[format]) {
       const { selection } = editor;
       if (!selection) return;
 
@@ -44,7 +83,7 @@ const toggleBlock = (editor, { format, align }) => {
       if (allowedNodes.includes(currentNode.type)) {
          newProperties.type = currentNode.type;
          newProperties.children = currentNode.children;
-         newProperties.align = align;
+         newProperties.align = TEXT_ALIGN[format];
       } else return;
    }
 

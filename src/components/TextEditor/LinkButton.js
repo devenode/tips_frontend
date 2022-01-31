@@ -2,21 +2,26 @@ import { useSlate } from 'slate-react';
 import { Editor, Transforms, Element, Range } from 'slate';
 import TAGS from './elements';
 import isUrl from 'is-url';
+import link from '../../icons/link.svg';
+import s from './StylePanel/styles.module.css';
 
 export const LinkButton = () => {
    const editor = useSlate();
+   const isActive = isLinkActive(editor);
 
    return (
       <button
-         active={isLinkActive(editor).toString()}
-         onClick={() => toggleLink(editor)}
+         className={isActive ? s.activeBtn : null}
+         onMouseDown={e => toggleLink(editor, null, e)}
       >
-         link
+         <img src={link} alt="Link" />
       </button>
    )
 }
 
-export const toggleLink = (editor, url) => {
+export const toggleLink = (editor, url, e) => {
+   if (e) e.preventDefault();
+
    if (isLinkActive(editor)) {
       Transforms.unwrapNodes(editor, {
          match: n =>
