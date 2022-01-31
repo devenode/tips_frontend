@@ -12,9 +12,6 @@ const TAGS = {
    UL: `bulleted-list`,
    OL: `numbered-list`,
    PRE: `preformatted`,
-   IMG: `image`,
-   IFRAME: `iframe`,
-   TABLE: `table`,
 }
 
 export default TAGS;

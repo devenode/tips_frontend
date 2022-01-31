@@ -25,9 +25,6 @@ export const StylePanel = () => {
          <BlockButton align="right"/>
          <BlockButton format={TAGS.UL} />
          <BlockButton format={TAGS.OL} />
-         <BlockButton format={TAGS.IMG} />
-         <BlockButton format={TAGS.IFRAME} />
-         <BlockButton format={TAGS.TABLE} />
       </div>
    )
 }
