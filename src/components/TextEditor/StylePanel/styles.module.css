@@ -1,3 +1,19 @@
 .stylePanelBox {
    display: flex;
 }
+
+.stylePanelBox button {
+   border: none;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 23px;
+   height: 23px;
+   margin-right: 10px;
+   background-color: #fff;
+   border-radius: 3px;
+}
+
+.stylePanelBox .activeBtn {
+   background-color: #eeeeee;
+}

@@ -1,15 +1,28 @@
 import { useSlate } from 'slate-react';
 import { Editor } from 'slate';
+import bold from '../../icons/bold.svg';
+import italic from '../../icons/italic.svg';
+import underline from '../../icons/underline.svg';
+import strike from '../../icons/strike.svg';
+import s from './StylePanel/styles.module.css';
 
 export const StyleButton = ({ format }) => {
+   const icons = {
+      bold,
+      italic,
+      underline,
+      strike
+   }
+
    const editor = useSlate();
+   const isActive = isStyleActive(editor, format);
 
    return (
       <button
-         active={isStyleActive(editor, format).toString()}
-         onClick={e => toggleStyle(editor, format)}
+         className={isActive ? s.activeBtn : null}
+         onMouseDown={e => toggleStyle(editor, format, e)}
       >
-         {format}
+         <img src={icons[format]} alt={format} />
       </button>
    )
 }
@@ -19,7 +32,8 @@ const isStyleActive = (editor, format) => {
    return marks ? marks[format] === true : false;
 }
 
-const toggleStyle = (editor, format) => {
+const toggleStyle = (editor, format,e ) => {
+   e.preventDefault();
    const isActive = isStyleActive(editor, format);
 
    if (isActive) {
