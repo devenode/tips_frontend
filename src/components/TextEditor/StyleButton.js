@@ -1,11 +1,17 @@
 import { useSlate } from 'slate-react';
 import { Editor } from 'slate';
+import isHotkey from 'is-hotkey';
 import bold from '../../icons/bold.svg';
 import italic from '../../icons/italic.svg';
 import underline from '../../icons/underline.svg';
 import strike from '../../icons/strike.svg';
 import s from './StylePanel/styles.module.css';
 
+export const HOTKEYS = {
+   'mod+b': `bold`,
+   'mod+i': `italic`,
+   'mod+u': `underline`
+}
 
 export const TEXT_STYLES = {
    bold: `bold`,
@@ -49,6 +55,17 @@ const toggleStyle = (editor, format, e) => {
    } else {
       Editor.addMark(editor, format, true);
    }
+}
+
+export const handleHotkeyPress = (editor, e) => {
+   for (const hotkey in HOTKEYS) {
+      if (isHotkey(hotkey, e)) {
+         e.preventDefault();
+         const mark = HOTKEYS[hotkey];
+         toggleStyle(editor, mark);
+      }
+   }
+
 }
 
 export default StyleButton;

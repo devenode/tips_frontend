@@ -1,5 +1,5 @@
 const TAGS = {
-   P: `paragraph`,
+   P: `Paragraph`,
    A: `link`,
    BLOCKQUOTE: `blockquote`,
    H1: `Heading 1`,

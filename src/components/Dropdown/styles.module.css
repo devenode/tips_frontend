@@ -1,0 +1,14 @@
+.dropdownBox {
+   position: relative;
+}
+
+.optionsBox {
+   position: absolute;
+   top: 0;
+   left: 0;
+   display: none;
+}
+
+.showOptions {
+   display: block;
+}

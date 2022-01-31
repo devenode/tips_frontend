@@ -3,7 +3,7 @@ import { Editable, useSlate } from 'slate-react';
 import Leaf from './Leaf';
 import Block from './Block';
 import { stepInOutFromInline } from './withInlines';
-import { handleHotkeyPress } from './hotkeys';
+import { handleHotkeyPress } from './StyleButton';
 import s from './styles.module.css';
 
 const TextEditor = props => {
