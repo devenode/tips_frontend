@@ -4,9 +4,24 @@
 
 .optionsBox {
    position: absolute;
-   top: 0;
+   top: -1px;
    left: 0;
    display: none;
+   border-radius: 4px;
+   background-color: #fff;
+   box-shadow: 0 3px 8px 0 #0000002e;
+   z-index: 9999;
+}
+
+.optionsBox>button {
+   margin: 5px;
+}
+
+.optionsBox>div {
+   margin: 4px 5px;
+   cursor: pointer;
+   padding: 5px;
+   border-radius: 3px;
 }
 
 .showOptions {

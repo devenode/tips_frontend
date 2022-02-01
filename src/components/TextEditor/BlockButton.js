@@ -9,6 +9,8 @@ import left from '../../icons/left.svg';
 import preformatted from '../../icons/preformatted.svg';
 import numbered_list from '../../icons/numbered_list.svg';
 import bulleted_list from '../../icons/bulleted_list.svg';
+import { setChosen } from '../../actions/dropdown';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -22,7 +24,7 @@ export const LIST_TYPES = [TAGS.OL, TAGS.UL];
 
 export const HEADINGS = [TAGS.H1, TAGS.H2, TAGS.H3];
 
-const icons = {
+export const icons = {
    blockquote,
    right,
    center,
@@ -56,6 +58,8 @@ export const BlockButton = props => {
 
 const toggleBlock = (editor, { format }, e) => {
    e.preventDefault();
+
+   // const dispatch = useDispatch();
 
    const isActive = isBlockActive(editor, format);
    const isList = LIST_TYPES.includes(format);
@@ -102,21 +106,23 @@ const toggleBlock = (editor, { format }, e) => {
       const block = { type: format, children: [] }
       Transforms.wrapNodes(editor, block);
    }
+
+   if (HEADINGS.includes(format)) {
+      // dispatch(setChosen(format));
+   }
 }
 
 const isBlockActive = (editor, format) => {
    const { selection } = editor;
    if (!selection) return false;
 
-   const [match] = Array.from(
-      Editor.nodes(editor, {
-         at: Editor.unhangRange(editor, selection),
-         match: n =>
-            !Editor.isEditor(n) &&
-            Element.isElement(n) &&
-            n.type === format,
-      })
-   );
+   const [match] = Editor.nodes(editor, {
+      at: Editor.unhangRange(editor, selection),
+      match: n =>
+         !Editor.isEditor(n) &&
+         Element.isElement(n) &&
+         n.type === format,
+   });
 
    return !!match;
 }

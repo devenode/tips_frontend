@@ -1,5 +1,6 @@
 .stylePanelBox {
    display: flex;
+   align-items: center;
 }
 
 .stylePanelBox button {
@@ -9,9 +10,27 @@
    align-items: center;
    width: 23px;
    height: 23px;
-   margin-right: 10px;
    background-color: #fff;
    border-radius: 3px;
+}
+
+.stylePanelBox button:focus {
+   box-shadow: none;
+   border: none;
+}
+
+.stylePanelBox > div,
+.stylePanelBox button {
+   margin-right: 10px;
+}
+
+.stylePanelBox > div:last-child {
+   margin: 0;
+}
+
+.stylePanelBox > div:nth-child(1) {
+   width: 91px;
+   margin: 0 10px 0 0;
 }
 
 .stylePanelBox .activeBtn {
