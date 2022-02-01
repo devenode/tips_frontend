@@ -12,6 +12,7 @@ export const StylePanel = () => {
       <BlockButton format={TAGS.H1} />,
       <BlockButton format={TAGS.H2} />,
       <BlockButton format={TAGS.H3} />,
+      <BlockButton format={TAGS.P} />,
    ];
    
    const lists = [
@@ -24,7 +25,7 @@ export const StylePanel = () => {
       <BlockButton format={TEXT_ALIGN.center} />,
       <BlockButton format={TEXT_ALIGN.right} />
    ];
-   
+
    return (
       <div className={s.stylePanelBox}>
          

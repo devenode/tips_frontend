@@ -9,10 +9,6 @@ import left from '../../icons/left.svg';
 import preformatted from '../../icons/preformatted.svg';
 import numbered_list from '../../icons/numbered_list.svg';
 import bulleted_list from '../../icons/bulleted_list.svg';
-import { setChosen } from '../../actions/dropdown';
-import { useDispatch } from 'react-redux';
-
-
 
 export const TEXT_ALIGN = { 
    left: `left`,
@@ -22,7 +18,7 @@ export const TEXT_ALIGN = {
 
 export const LIST_TYPES = [TAGS.OL, TAGS.UL];
 
-export const HEADINGS = [TAGS.H1, TAGS.H2, TAGS.H3];
+export const HEADINGS = [TAGS.H1, TAGS.H2, TAGS.H3, TAGS.P];
 
 export const icons = {
    blockquote,
@@ -39,27 +35,29 @@ export const BlockButton = props => {
    const editor = useSlate();
    const isActive = isBlockActive(editor, format);
 
+   const handleClick = e => {
+      toggleBlock(editor, format, e);
+   }
+
    return (
       HEADINGS.includes(format) ? 
       
       <div
          className={isActive ? s.activeBtn : null}
-         onMouseDown={e => toggleBlock(editor, props, e)}
+         onMouseDown={handleClick}
       >{format}</div> :
 
       <button
          className={isActive ? s.activeBtn : null}
-         onMouseDown={e => toggleBlock(editor, props, e)}
+         onMouseDown={handleClick}
       >
          <img src={icons[format]} alt={format} />  
       </button>
    )
 }
 
-const toggleBlock = (editor, { format }, e) => {
+const toggleBlock = (editor, format, e) => {
    e.preventDefault();
-
-   // const dispatch = useDispatch();
 
    const isActive = isBlockActive(editor, format);
    const isList = LIST_TYPES.includes(format);
@@ -105,10 +103,6 @@ const toggleBlock = (editor, { format }, e) => {
    if (!isActive && (isList || isPre)) {
       const block = { type: format, children: [] }
       Transforms.wrapNodes(editor, block);
-   }
-
-   if (HEADINGS.includes(format)) {
-      // dispatch(setChosen(format));
    }
 }
 

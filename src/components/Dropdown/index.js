@@ -12,8 +12,8 @@ export const Dropdown = props => {
    const [isVisible, setVisibility] = useState(false);
 
    const handleWindowClick = useCallback(e => {
-      const dropdownNode = dropdown.current;
-      if (isVisible && !dropdownNode.contains(e.target)) {
+
+      if (isVisible && !dropdown.current.contains(e.target)) {
          setVisibility(false);
       }
 
@@ -27,16 +27,20 @@ export const Dropdown = props => {
       }
    }, [handleWindowClick]);
 
-   const handleClick = e => {
-      setVisibility(true);
+   const handleDropClick = e => {
+      if (!isVisible) setVisibility(true);
+   }
+
+   const handleListClick = e => {
+      if (isVisible) setVisibility(false);
    }
 
    return (
-      <div ref={dropdown} onClick={handleClick} className={s.dropdownBox}>
+      <div ref={dropdown} onClick={handleDropClick} className={s.dropdownBox}>
          <div className={s.chosenBox}>
             {label}
          </div>
-         <div className={`${s.optionsBox} ${isVisible ? s.showOptions : ``}`}>
+         <div onClick={handleListClick} className={`${s.optionsBox} ${isVisible ? s.showOptions : ``}`}>
             {
                options.map((el, i) => {
                   return <Fragment key={i}>{el}</Fragment>
@@ -46,10 +50,6 @@ export const Dropdown = props => {
       </div>
    )
 }
-
-// TO DO добавить очистку формата
-// TO DO добавить проверку на наличие текста перед тем, как его форматировать
-// Если текста нет - не выполнять формат текста
 
 export const useLabel = type => {
    const option = useSelector(state => state.dropdown[type]);

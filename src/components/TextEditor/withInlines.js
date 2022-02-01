@@ -28,7 +28,7 @@ export const withInlines = editor => {
       } else if (text) {
          const noEmptyStrings = text.split(`\n`).filter(str => str.length);
          const dataTrans = new DataTransfer();
-         dataTrans.setData(`text/plain`, noEmptyStrings.join(`\n`));         
+         dataTrans.setData(`text/plain`, noEmptyStrings.join(`\n`));
          insertData(dataTrans);
 
       } else {
@@ -51,13 +51,15 @@ export const stepInOutFromInline = (editor, e) => {
 
    if (selection && Range.isCollapsed(selection)) {
       const { nativeEvent } = e;
-      if (isKeyHotkey(`space`, nativeEvent)) {
-         Transforms.move(editor, { unit: `offset` });
-         return;
+      if (isKeyHotkey(`left`, nativeEvent)) {
+         e.preventDefault();
+         Transforms.move(editor, { unit: 'offset', reverse: true });
+         return
       }
-      if (isKeyHotkey(`enter`, nativeEvent)) {
+      if (isKeyHotkey(`right`, nativeEvent)) {
+         e.preventDefault();
          Transforms.move(editor, { unit: `offset` });
-         return;
+         return
       }
    }
 }

@@ -13,13 +13,13 @@ const initState = {
 export const dropdown = (state = initState, action) => {
    switch (action.type) {
       case DROPDOWN_SET_HEADING:
-         return { ...state, chosen: action.heading }
+         return { ...state, heading: action.heading }
 
       case DROPDOWN_SET_ALIGN:
-         return { ...state, chosen: action.align }
+         return { ...state, align: action.align }
 
       case DROPDOWN_SET_LIST:
-         return { ...state, chosen: action.list }
+         return { ...state, list: action.list }
 
       default: return state;
    }
