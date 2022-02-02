@@ -3,7 +3,7 @@ import BlockButton from '../BlockButton';
 import LinkButton from '../LinkButton';
 import TAGS from '../elements';
 import s from './styles.module.css';
-import { TEXT_ALIGN } from '../BlockButton';
+import { TEXT_ALIGN, CLEAR } from '../BlockButton';
 import { TEXT_STYLES } from '../StyleButton';
 import Dropdown, { useLabel } from '../../Dropdown';
 
@@ -38,6 +38,7 @@ export const StylePanel = () => {
          <BlockButton format={TAGS.PRE} />
          <BlockButton format={TAGS.BLOCKQUOTE} />
          <Dropdown options={lists} label={useLabel(`list`)}/>
+         <BlockButton format={CLEAR} />
 
       </div>
    )

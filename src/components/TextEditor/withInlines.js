@@ -1,13 +1,14 @@
 import { Range, Transforms } from 'slate';
 import { isKeyHotkey } from 'is-hotkey';
 import { toggleLink } from './LinkButton';
+import TAGS from './elements';
 import isUrl from 'is-url';
 
 export const withInlines = editor => {
    const { insertData, insertText, isInline } = editor;
 
    editor.isInline = element =>
-      [`link`].includes(element.type) || isInline(element);
+      [TAGS.A].includes(element.type) || isInline(element);
 
    editor.insertText = text => {
       if (!text.length) return;
@@ -53,7 +54,7 @@ export const stepInOutFromInline = (editor, e) => {
       const { nativeEvent } = e;
       if (isKeyHotkey(`left`, nativeEvent)) {
          e.preventDefault();
-         Transforms.move(editor, { unit: 'offset', reverse: true });
+         Transforms.move(editor, { unit: `offset`, reverse: true });
          return
       }
       if (isKeyHotkey(`right`, nativeEvent)) {

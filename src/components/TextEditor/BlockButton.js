@@ -9,6 +9,8 @@ import left from '../../icons/left.svg';
 import preformatted from '../../icons/preformatted.svg';
 import numbered_list from '../../icons/numbered_list.svg';
 import bulleted_list from '../../icons/bulleted_list.svg';
+import clear from '../../icons/clear.svg';
+import { TEXT_STYLES } from './StyleButton';
 
 export const TEXT_ALIGN = { 
    left: `left`,
@@ -18,7 +20,7 @@ export const TEXT_ALIGN = {
 
 export const LIST_TYPES = [TAGS.OL, TAGS.UL];
 
-export const HEADINGS = [TAGS.H1, TAGS.H2, TAGS.H3, TAGS.P];
+export const HEADINGS = [TAGS.H1, TAGS.H2, TAGS.H3];
 
 export const icons = {
    blockquote,
@@ -26,9 +28,12 @@ export const icons = {
    center,
    left,
    preformatted,
+   clear,
    [`numbered-list`]: numbered_list,
    [`bulleted-list`]: bulleted_list
 }
+
+export const CLEAR = `clear`;
 
 export const BlockButton = props => {
    const { format } = props;
@@ -58,6 +63,34 @@ export const BlockButton = props => {
 
 const toggleBlock = (editor, format, e) => {
    e.preventDefault();
+
+   if (format === CLEAR) {
+      for (const style in TEXT_STYLES) {
+         if (Object.hasOwnProperty.call(TEXT_STYLES, style)) {
+            Editor.removeMark(editor, style);    
+         }
+      }
+
+      Transforms.unwrapNodes(editor, {
+         match: n =>
+            !Editor.isEditor(n) &&
+            Element.isElement(n) &&
+            (LIST_TYPES.includes(n.type) ||
+            TAGS.PRE === n.type || 
+            TAGS.A === n.type),
+         split: true,
+      });
+
+      Transforms.unsetNodes(editor, `align`, {
+         match: n =>
+            !Editor.isEditor(n) &&
+            Element.isElement(n) &&
+            n.align,
+      })
+
+      Transforms.setNodes(editor, { type: TAGS.P });
+      return;
+   }
 
    const isActive = isBlockActive(editor, format);
    const isList = LIST_TYPES.includes(format);
@@ -108,7 +141,7 @@ const toggleBlock = (editor, format, e) => {
 
 const isBlockActive = (editor, format) => {
    const { selection } = editor;
-   if (!selection) return false;
+   if (!selection || format === CLEAR) return false;
 
    const [match] = Editor.nodes(editor, {
       at: Editor.unhangRange(editor, selection),

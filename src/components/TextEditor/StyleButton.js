@@ -17,7 +17,7 @@ export const TEXT_STYLES = {
    bold: `bold`,
    italic: `italic`,
    underline: `underline`,
-   strike: `strike`,
+   strike: `strike`
 }
 
 const icons = {

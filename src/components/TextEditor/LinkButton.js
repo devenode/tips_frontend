@@ -27,7 +27,7 @@ export const toggleLink = (editor, url, e) => {
          match: n =>
             !Editor.isEditor(n) &&
             Element.isElement(n) &&
-            n.type === `link`
+            n.type === TAGS.A
       });
       return;
    }
@@ -64,7 +64,7 @@ export const isLinkActive = editor => {
       match: n =>
          !Editor.isEditor(n) &&
          Element.isElement(n) &&
-         n.type === `link`,
+         n.type === TAGS.A,
    });
 
    return !!link;
