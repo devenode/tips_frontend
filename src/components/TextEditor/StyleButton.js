@@ -62,7 +62,7 @@ export const handleHotkeyPress = (editor, e) => {
       if (isHotkey(hotkey, e)) {
          e.preventDefault();
          const mark = HOTKEYS[hotkey];
-         toggleStyle(editor, mark);
+         toggleStyle(editor, mark, e);
       }
    }
 

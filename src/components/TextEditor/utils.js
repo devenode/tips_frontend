@@ -1,13 +1,21 @@
 import { Editor, Transforms } from 'slate';
+import { useSlate } from 'slate-react';
 
 export const getTextStyle = editor => {
    const styles = Editor.marks(editor);
    return styles;
 }
 
-export const getBlocksType = editor => {
+export const useBlocksType = () => {
+   const editor = useSlate();
+
+   const block = {
+      type: null,
+      align: null
+   }
+
    const { selection } = editor;
-   if (selection == null) return null;
+   if (selection === null) return block;
 
    const topLevelBlockNodesInSelection = Editor.nodes(editor, {
       at: selection,
@@ -15,22 +23,23 @@ export const getBlocksType = editor => {
       match: n => Editor.isBlock(editor, n),
    });
 
-   let blockType = null;
-   let block = topLevelBlockNodesInSelection.next();
+   let result = topLevelBlockNodesInSelection.next();
 
-   while (!block.done) {
-      const [node] = block.value;
+   while (!result.done) {
+      const [node] = result.value;
 
-      if (blockType === null) {
-         blockType = node.type;
-      } else if (blockType !== node.type) {
-         return `multiple`;
+      if (block.type === null) {
+         block.type = node.type;
+         block.align = node.align;
+      } else if (block.type !== node.type) {
+         block.type = `Multiple`;
+         return block;
       }
 
-      block = topLevelBlockNodesInSelection.next();
+      result = topLevelBlockNodesInSelection.next();
    }
 
-   return blockType;
+   return block;
 }
 
 export const setBlocksType = (editor, type) => {

@@ -11,8 +11,7 @@ export const StylePanel = () => {
    const headings = [
       <BlockButton format={TAGS.H1} />,
       <BlockButton format={TAGS.H2} />,
-      <BlockButton format={TAGS.H3} />,
-      <BlockButton format={TAGS.P} />,
+      <BlockButton format={TAGS.H3} />
    ];
    
    const lists = [
