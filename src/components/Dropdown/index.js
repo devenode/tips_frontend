@@ -1,9 +1,7 @@
 import { Fragment, useRef, useEffect, useCallback, useState } from 'react';
 import { useBlocksType } from '../TextEditor/utils';
 import s from './styles.module.css';
-import { icons } from '../TextEditor/BlockButton';
-import TAGS from '../TextEditor/elements';
-import { TEXT_ALIGN } from '../TextEditor/BlockButton';
+import { TAGS, TEXT_ALIGN, ICONS } from '../TextEditor/constants';
 
 export const Dropdown = props => {
    const { options, label } = props;
@@ -73,7 +71,7 @@ export const useLabel = dropdown => {
                margin: 0,
                backgroundColor: `${isActive ? `#eee` : `#fff`}`,
             }}>
-               <img src={icons[align] && isActive ? icons[align] : icons[TEXT_ALIGN.left]} alt={align} />
+               <img src={ICONS[align] && isActive ? ICONS[align] : ICONS[TEXT_ALIGN.left]} alt={align} />
             </button>
          )
 
@@ -84,7 +82,7 @@ export const useLabel = dropdown => {
                margin: 0,
                backgroundColor: `${isActive ? `#eee` : `#fff`}`,
             }}>
-               <img src={icons[type] && isActive ? icons[type] : icons[TAGS.UL]} alt={type} />
+               <img src={ICONS[type] && isActive ? ICONS[type] : ICONS[TAGS.UL]} alt={type} />
             </button>
          )
 

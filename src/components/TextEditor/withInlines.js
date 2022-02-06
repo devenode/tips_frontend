@@ -1,7 +1,7 @@
 import { Range, Transforms } from 'slate';
 import { isKeyHotkey } from 'is-hotkey';
 import { toggleLink } from './LinkButton';
-import TAGS from './elements';
+import { TAGS } from './constants';
 import isUrl from 'is-url';
 
 export const withInlines = editor => {

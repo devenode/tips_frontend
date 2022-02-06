@@ -1,4 +1,4 @@
-import { Editor, Transforms } from 'slate';
+import { Editor, Transforms, Node } from 'slate';
 import { useSlate } from 'slate-react';
 
 export const getTextStyle = editor => {
@@ -62,4 +62,8 @@ export const getSelectedText = editor => {
 
    const selectedText = Editor.string(editor, selection);
    return selectedText;
+}
+
+export const serialize = nodes => {
+   return nodes.map(n => Node.string(n)).join('\n')
 }

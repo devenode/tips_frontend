@@ -8,7 +8,7 @@ import H1 from './Blocks/H1';
 import H2 from './Blocks/H2';
 import H3 from './Blocks/H3';
 import Blockquote from './Blocks/Blockquote';
-import TAGS from './elements';
+import { TAGS } from './constants';
 
 const Block = props => {
    switch (props.element.type) {

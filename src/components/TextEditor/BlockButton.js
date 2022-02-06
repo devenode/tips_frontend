@@ -1,39 +1,7 @@
 import { useSlate } from 'slate-react';
 import { Editor, Element, Transforms } from 'slate';
-import TAGS from './elements';
 import s from './StylePanel/styles.module.css';
-import blockquote from '../../icons/blockquote.svg';
-import right from '../../icons/right.svg';
-import center from '../../icons/center.svg';
-import left from '../../icons/left.svg';
-import preformatted from '../../icons/preformatted.svg';
-import numbered_list from '../../icons/numbered_list.svg';
-import bulleted_list from '../../icons/bulleted_list.svg';
-import clear from '../../icons/clear.svg';
-import { TEXT_STYLES } from './StyleButton';
-
-export const TEXT_ALIGN = { 
-   left: `left`,
-   center: `center`,
-   right: `right`
-}
-
-export const LIST_TYPES = [TAGS.OL, TAGS.UL];
-
-export const HEADINGS = [TAGS.H1, TAGS.H2, TAGS.H3];
-
-export const icons = {
-   blockquote,
-   right,
-   center,
-   left,
-   preformatted,
-   clear,
-   [`numbered-list`]: numbered_list,
-   [`bulleted-list`]: bulleted_list
-}
-
-export const CLEAR = `clear`;
+import { TAGS, TEXT_STYLES, HEADINGS, LIST_TYPES, CLEAR, TEXT_ALIGN, ICONS } from './constants';
 
 export const BlockButton = props => {
    const { format } = props;
@@ -56,7 +24,7 @@ export const BlockButton = props => {
          className={isActive ? s.activeBtn : null}
          onMouseDown={handleClick}
       >
-         <img src={icons[format]} alt={format} />  
+         <img src={ICONS[format]} alt={format} />  
       </button>
    )
 }

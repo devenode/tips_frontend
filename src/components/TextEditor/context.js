@@ -3,7 +3,7 @@ import { createEditor } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import withInlines from './withInlines';
-import TAGS from './elements';
+import { TAGS } from './constants';
 
 const SlateContext = ({ children }) => {
    const editor = useMemo(() => withInlines(withReact(withHistory(createEditor()))), []);

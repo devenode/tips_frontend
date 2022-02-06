@@ -1,6 +1,6 @@
 import { useSlate } from 'slate-react';
 import { Editor, Transforms, Element, Range } from 'slate';
-import TAGS from './elements';
+import { TAGS } from './constants';
 import isUrl from 'is-url';
 import link from '../../icons/link.svg';
 import s from './StylePanel/styles.module.css';

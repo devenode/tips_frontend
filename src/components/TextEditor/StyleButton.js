@@ -1,31 +1,8 @@
 import { useSlate } from 'slate-react';
 import { Editor } from 'slate';
 import isHotkey from 'is-hotkey';
-import bold from '../../icons/bold.svg';
-import italic from '../../icons/italic.svg';
-import underline from '../../icons/underline.svg';
-import strike from '../../icons/strike.svg';
 import s from './StylePanel/styles.module.css';
-
-export const HOTKEYS = {
-   'mod+b': `bold`,
-   'mod+i': `italic`,
-   'mod+u': `underline`
-}
-
-export const TEXT_STYLES = {
-   bold: `bold`,
-   italic: `italic`,
-   underline: `underline`,
-   strike: `strike`
-}
-
-const icons = {
-   bold,
-   italic,
-   underline,
-   strike
-}
+import { ICONS, HOTKEYS } from './constants';
 
 export const StyleButton = ({ format }) => {
    const editor = useSlate();
@@ -36,7 +13,7 @@ export const StyleButton = ({ format }) => {
          className={isActive ? s.activeBtn : null}
          onMouseDown={e => toggleStyle(editor, format, e)}
       >
-         <img src={icons[format]} alt={format} />
+         <img src={ICONS[format]} alt={format} />
       </button>
    )
 }
