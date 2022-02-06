@@ -9,7 +9,7 @@ import { useSelection } from './utils';
 const SlateContext = ({ children }) => {
    const editor = useMemo(() => withInlines(withReact(withHistory(createEditor()))), []);
    const [value, setValue] = useState(EMPTY_DOC);
-   const [selection, setSelection] = useSelection(editor)
+   const [selection, setSelection] = useSelection(editor);
 
    const onChangeHandler = useCallback(
       (newValue) => {
