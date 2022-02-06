@@ -151,7 +151,7 @@ button {
 
 button:focus {
    box-shadow: 0 0 0 3px #C6E2FF;
-   border: 1px solid #A5CFFA;
+   /* border: 1px solid #A5CFFA; */
 }
 
 a {

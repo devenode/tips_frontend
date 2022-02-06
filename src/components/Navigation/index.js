@@ -21,12 +21,14 @@ const Navigation = props => {
                <Route path="/*" element={<Search />} />
                <Route path="/*" element={<StylePanel />}>
                   <Route path="edit-post" element={<></>} />
+                  <Route path="edit-post/:id" element={<></>} />
                </Route>
             </Routes>
 
             <Routes>
                <Route path="/*" element={<BlueButton title="Add new tip" handleClick={() => navigate(`/edit-post`)} />} />
                <Route path="/*" element={<BlueButton title="Save" handleClick={() => null} />}>
+                  <Route path="edit-post" element={<></>} />
                   <Route path="edit-post/:id" element={<></>} />
                </Route>
             </Routes>
