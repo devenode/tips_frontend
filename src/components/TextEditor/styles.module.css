@@ -83,3 +83,7 @@
    margin-bottom: 0;
    line-height: 1.4rem;
 }
+
+.editorBox span[data-slate-placeholder="true"] {
+   color: #A1A9B8;
+}

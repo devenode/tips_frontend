@@ -4,6 +4,7 @@ import Leaf from './Leaf';
 import Block from './Block';
 import { stepInOutFromInline } from './withInlines';
 import { handleHotkeyPress } from './StyleButton';
+import Placeholder from './Placeholder';
 import s from './styles.module.css';
 
 const TextEditor = props => {
@@ -21,10 +22,11 @@ const TextEditor = props => {
          <Editable
             spellCheck
             autoFocus
-            placeholder="New paragraph…"
-            renderElement={renderElement}
             onKeyDown={onKeyDown}
+            renderElement={renderElement}
             renderLeaf={renderLeaf}
+            placeholder="New paragraph…"
+            renderPlaceholder={Placeholder}
          />
       </div>
    )
