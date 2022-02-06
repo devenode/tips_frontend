@@ -1,5 +1,6 @@
 import { Editor, Transforms, Node } from 'slate';
 import { useSlate } from 'slate-react';
+import { useState, useCallback } from 'react';
 
 export const getTextStyle = editor => {
    const styles = Editor.marks(editor);
@@ -66,4 +67,19 @@ export const getSelectedText = editor => {
 
 export const serialize = nodes => {
    return nodes.map(n => Node.string(n)).join('\n')
+}
+
+export const useSelection = initSelection => {
+   const [selection, setSelection] = useState(initSelection);
+
+   const setSelectionOptimized = useCallback(
+      (newSelection) => {
+         // Any optimization here for selection
+
+         setSelection(newSelection);
+      },
+      [setSelection]
+   );
+
+   return [selection, setSelectionOptimized];
 }

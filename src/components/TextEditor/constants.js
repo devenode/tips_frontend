@@ -41,7 +41,7 @@ export const HOTKEYS = {
    'mod+u': TEXT_STYLES.underline
 }
 
-export const TEXT_ALIGN = { 
+export const TEXT_ALIGN = {
    left: `left`,
    center: `center`,
    right: `right`
@@ -83,4 +83,11 @@ export const TEXT_ALIGN_BTNS = [
    <BlockButton format={TEXT_ALIGN.left} />,
    <BlockButton format={TEXT_ALIGN.center} />,
    <BlockButton format={TEXT_ALIGN.right} />
+];
+
+export const EMPTY_DOC = [
+   {
+      type: TAGS.P,
+      children: [{ text: `` }],
+   },
 ];
