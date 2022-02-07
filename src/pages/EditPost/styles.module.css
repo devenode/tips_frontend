@@ -1,10 +1,9 @@
-.postTitlesBox,
-.postTitlesBox > div {
-   margin: 0 0 10px 0;
+.postTitlesBox {
+   margin: 0 0 30px 0;
 }
 
-.postTitlesBox > div:last-of-type {
-   margin-bottom: 30px;
+.postTitlesBox > div {
+   margin: 0 0 10px 0;
 }
 
 .postTitlesBox input {
