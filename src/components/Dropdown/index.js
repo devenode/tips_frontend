@@ -11,7 +11,7 @@ export const Dropdown = props => {
 
    const handleWindowClick = useCallback(
       (e) => {
-         if (isVisible && !dropdown.current.contains(e.target)) {
+         if (isVisible && !dropdown.current?.contains(e.target)) {
             setVisibility(false);
          }
       },
@@ -23,9 +23,7 @@ export const Dropdown = props => {
       return () => {
          document.removeEventListener(`click`, handleWindowClick);
       }
-   },
-      [handleWindowClick]
-   );
+   }, [handleWindowClick]);
 
    const handleDropClick = e => {
       if (!isVisible) setVisibility(true);
