@@ -4,26 +4,28 @@ import s from './styles.module.css';
 import { TAGS, TEXT_ALIGN, ICONS } from '../TextEditor/constants';
 
 export const Dropdown = props => {
-   const { options, label } = props;
+   const { options, label, labelClasses, optionsClasses } = props;
    const dropdown = useRef();
 
    const [isVisible, setVisibility] = useState(false);
 
-   const handleWindowClick = useCallback(e => {
-
-      if (isVisible && !dropdown.current.contains(e.target)) {
-         setVisibility(false);
-      }
-
-   }, [isVisible]);
+   const handleWindowClick = useCallback(
+      (e) => {
+         if (isVisible && !dropdown.current.contains(e.target)) {
+            setVisibility(false);
+         }
+      },
+      [isVisible]
+   );
 
    useEffect(() => {
       document.addEventListener(`click`, handleWindowClick);
-
       return () => {
          document.removeEventListener(`click`, handleWindowClick);
       }
-   }, [handleWindowClick]);
+   },
+      [handleWindowClick]
+   );
 
    const handleDropClick = e => {
       if (!isVisible) setVisibility(true);
@@ -35,10 +37,10 @@ export const Dropdown = props => {
 
    return (
       <div ref={dropdown} onClick={handleDropClick} className={s.dropdownBox}>
-         <div className={s.chosenBox}>
+         <div className={labelClasses}>
             {label}
          </div>
-         <div onClick={handleListClick} className={`${s.optionsBox} ${isVisible ? s.showOptions : ``}`}>
+         <div onClick={handleListClick} className={`${s.optionsBox} ${optionsClasses || ``} ${isVisible ? s.showOptions : ``}`}>
             {
                options.map((el, i) => {
                   return <Fragment key={i}>{el}</Fragment>
@@ -65,7 +67,7 @@ export const useLabel = dropdown => {
          }}>{type && isActive ? type : TAGS.H1}</div>)
 
       case `align`:
-         isActive = [TEXT_ALIGN.center, TEXT_ALIGN.right].includes(align) ;
+         isActive = [TEXT_ALIGN.center, TEXT_ALIGN.right].includes(align);
          return (
             <button style={{
                margin: 0,

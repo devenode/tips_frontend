@@ -8,7 +8,7 @@ import { getPost } from '../../actions/post';
 const Post = props => {
    const { postId } = useParams();
 
-   const { isLoading, error, post } = useSelector(state => state.post);
+   const post = useSelector(state => state.post);
    const dispatch = useDispatch();
 
    useEffect(() => {
@@ -18,12 +18,12 @@ const Post = props => {
 
    
 
-   if (isLoading) {
+   if (post.isLoading) {
       return <div>Post is Loading...</div>
    }
 
-   if (error) {
-      return <div>Error: {error}</div>
+   if (post.error) {
+      return <div>Error: {post.error}</div>
    }
 
    return (

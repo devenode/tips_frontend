@@ -1,15 +1,33 @@
 .postTitlesBox,
 .postTitlesBox > div {
-   margin: 0 0 20px 0;
+   margin: 0 0 10px 0;
+}
+
+.postTitlesBox > div:last-of-type {
+   margin-bottom: 30px;
 }
 
 .postTitlesBox input {
    border: none;
    padding: 0;
    margin: 0;
-   font-size: 1.15rem;
+   font-size: .9rem;
 }
 
 .postTitlesBox input:focus {
    box-shadow: none;
+}
+
+.optionsList {
+   width: 100%;
+   top: 25px;
+}
+
+.optionsList > p {
+   padding: 10px 15px;
+   cursor: pointer;
+}
+
+.hoveredOption {
+   background-color: #f5f5f5;
 }
