@@ -1,3 +1,6 @@
+import req from '../utils/axios';
+import { getPost } from './post';
+
 export const SIDEMENU_SET_POST = `SIDEMENU/SET_POST`;
 export const SIDEMENU_SET_SECTION = `SIDEMENU/SET_SECTION`;
 export const SIDEMENU_SET_MENU = `SIDEMENU/SET_MENU`;
@@ -7,65 +10,13 @@ export const SIDEMENU_ERROR = `SIDEMENU/ERROR`;
 export const getSideMenu = () => {
    return async (dispatch, getState) => {
       try {
-         const sections = [
-            {
-               id: `1`,
-               title: `MySQL`,
-               posts: [
-                  {
-                     id: `1`,
-                     title: `Root password reset`
-                  },
-                  {
-                     id: `2`,
-                     title: `Change user privileges`
-                  },
-                  {
-                     id: `3`,
-                     title: `Dump db to file`
-                  }
-               ]
-            },
-            {
-               id: `2`,
-               title: `PostgreSQL`,
-               posts: [
-                  {
-                     id: `4`,
-                     title: `Basics for DB`
-                  }
-               ]
-            },
-            {
-               id: `3`,
-               title: `NginX`,
-               posts: [
-                  {
-                     id: `5`,
-                     title: `Setup proxy server`
-                  },
-                  {
-                     id: `6`,
-                     title: `SSL adding`
-                  },
-                  {
-                     id: `7`,
-                     title: `Standard setup file`
-                  },
-                  {
-                     id: `8`,
-                     title: `Certbot setup`
-                  },
-               ]
-            },
-         ];
-
-         await new Promise(res => setTimeout(() => res(), 700));
+         const sections = await req.get(`/sections`);
 
          if (sections.length) {
             dispatch(setSideMenu(sections));
             dispatch(setActiveSection(sections[0].id));
             dispatch(setFirstPostId(sections[0].posts[0].id));
+            dispatch(getPost(sections[0].posts[0].id));
          }
          
          dispatch(isSideMenuLoading(false));

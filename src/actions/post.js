@@ -1,3 +1,5 @@
+import req from '../utils/axios';
+
 export const POST_LOADING = `POST/LOADING`;
 export const POST_ERROR = `POST/ERROR`;
 export const POST_SET = `POST/SET`;
@@ -7,16 +9,7 @@ export const POST_SET_SHORT_TITLE = `POST/SET_SHORT_TITLE`;
 export const getPost = postId => {
    return async (dispatch, getState) => {
       try {
-         const post = {
-            id: `postId`,
-            shortTitle: `It's a Short post's title here`,
-            section: {
-               id: `sectionID`,
-               title: `Post Section Title`
-            }
-         }
-
-         await new Promise(res => setTimeout(() => res(), 700));
+         const { data: post } = await req.get(`/post/${postId}`);
 
          dispatch(setPost(post));
          dispatch(isPostLoading(false));

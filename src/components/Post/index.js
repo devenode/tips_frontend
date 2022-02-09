@@ -7,11 +7,13 @@ import { getPost } from '../../actions/post';
 
 const Post = props => {
    const { postId } = useParams();
-
+   
    const post = useSelector(state => state.post);
    const dispatch = useDispatch();
 
    useEffect(() => {
+      if (!postId) return;
+      
       dispatch(getPost(postId));
    }, [dispatch, postId]);
 
