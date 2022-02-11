@@ -1,0 +1,17 @@
+.errorBox {
+    position: absolute;
+    width: 100%;
+    z-index: 11000;
+    top: 0;
+    left: 0;
+    background-color: #ff874f;
+    display: flex;
+    justify-content: center;
+    padding: 12px 10px;
+}
+.errorBox > p {
+    max-width: 400px;
+    color: #7e2a02;
+    font-size: .85rem;
+    font-weight: 700;
+}

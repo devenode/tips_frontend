@@ -7,6 +7,7 @@ import NoMenuLayout from './layouts/NoMenuLayout';
 import Error404 from './pages/Error404';
 import Post from './components/Post';
 import SlateContext from './components/TextEditor/context';
+import Error from './components/Error';
 const EditPost = React.lazy(() => import('./pages/EditPost'));
 
 
@@ -15,6 +16,7 @@ const EditPost = React.lazy(() => import('./pages/EditPost'));
 const App = () => {
    return (
       <SlateContext>
+         <Error />
          <Routes>
             <Route path="/*" element={<MainLayout />}>
 
