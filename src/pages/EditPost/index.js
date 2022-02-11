@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TextEditor from '../../components/TextEditor';
 import Dropdown from '../../components/Dropdown';
 import s from './styles.module.css';
 import { setPostSection, setPostShortTitle } from '../../actions/post';
+import { getSections } from '../../actions/sections';
 
 const EditPost = props => {
+   const { sections } = useSelector(state => state.sections);
    const { shortTitle, section: { title: sectionTitle } } = useSelector(state => state.post);
    const dispatch = useDispatch();
 
@@ -21,31 +23,25 @@ const EditPost = props => {
       dispatch(setPostSection(e.target.innerHTML));
    }
 
-   const handlePostClick = e => {
-      dispatch(setPostShortTitle(e.target.innerHTML));
-   }
+   useEffect(() => {
+      dispatch(getSections());
+      
+   }, [dispatch]);
 
    const sectionTitleInput = <Input placeholder="Section title..." value={sectionTitle} handleChange={handleSectionChange} />
-   const shortTitleInput = <Input placeholder="Short post title..." value={shortTitle} handleChange={handleShortChange} />
-
-   // TO DO get list of options
-   const sections = [
-      <Option title="Section #1 title" handleClick={handleSectionClick} />,
-      <Option title="Section #2 title" handleClick={handleSectionClick} />,
-      <Option title="Section #3 title" handleClick={handleSectionClick} />,
-   ];
-
-   const posts = [
-      <Option title="Post #1 title" handleClick={handlePostClick} />,
-      <Option title="Post #2 title" handleClick={handlePostClick} />,
-      <Option title="Post #3 title" handleClick={handlePostClick} />,
-   ];
+ 
+   let sectionsOptions = [];
+   if (sections.length) {
+      sectionsOptions = sections.map(el => {
+         <Option key={el.id} title={el.title} handleClick={handleSectionClick} />
+      });
+   }
 
    return (
       <>
          <div className={s.postTitlesBox}>
-            <Dropdown options={sections} label={sectionTitleInput} optionsClasses={s.optionsList} />
-            <Dropdown options={posts} label={shortTitleInput} optionsClasses={s.optionsList} />
+            <Dropdown options={sectionsOptions} label={sectionTitleInput} optionsClasses={s.optionsList} />
+            <Input placeholder="Short post title..." value={shortTitle} handleChange={handleShortChange} />
          </div>
          <TextEditor />
       </>

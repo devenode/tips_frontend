@@ -2,18 +2,18 @@ import s from './styles.module.css';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import arrow from '../../icons/arrow-down.svg';
-import { getSideMenu, setActiveSection } from '../../actions/sideMenu';
+import { getSections, setActiveSection } from '../../actions/sections';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const SideMenu = props => {
    let { postId: chosenPostId } = useParams();
 
-   const { isLoading, error, sections, activeSectionId, firstPostId } = useSelector(state => state.sideMenu);
+   const { isLoading, error, sections, activeSectionId } = useSelector(state => state.sections);
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(getSideMenu());
+      dispatch(getSections());
    }, [dispatch]);
 
    const handleSectionClick = e => {
@@ -24,8 +24,8 @@ const SideMenu = props => {
       dispatch(setActiveSection(e.target.id));
    }
 
-   if (!chosenPostId) {
-      chosenPostId = firstPostId;
+   if (!chosenPostId && sections.length) {
+      chosenPostId = sections[0].posts[0];
    }
 
    if (isLoading) {
