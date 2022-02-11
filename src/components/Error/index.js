@@ -1,12 +1,9 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import s from './styles.module.css';
 import { setError } from '../../actions/error';
 
 export const Error = props => {
-    console.log(`Component run`)
-    const box = useRef();
-
     const { msg } = useSelector(state => state.error);
     const dispatch = useDispatch();
 
@@ -27,7 +24,7 @@ export const Error = props => {
 
 
     return (
-        <div ref={box} className={s.errorBox} style={style}>
+        <div className={s.errorBox} style={style}>
             <p>{msg}</p>
         </div>
     )

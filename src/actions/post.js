@@ -1,4 +1,5 @@
 import req from '../utils/axios';
+import { setError } from './error';
 
 export const POST_LOADING = `POST/LOADING`;
 export const POST_ERROR = `POST/ERROR`;
@@ -13,10 +14,23 @@ export const getPost = postId => {
 
          dispatch(setPost(post));
          dispatch(isPostLoading(false));
-         
+
       } catch (error) {
          dispatch(setPostError(error.message));
          dispatch(isPostLoading(false));
+      }
+   }
+}
+
+export const savePost = content => {
+   return async (dispatch, getState) => {
+      try {
+         await req.post(`/post`, { content });
+
+         // to do set blue btn loading here
+         // redirect to main page on newly created post
+      } catch (error) {
+         dispatch(setError(error.message));
       }
    }
 }

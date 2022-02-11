@@ -4,12 +4,19 @@ import s from './styles.module.css';
 
 
 export const BlueButton = props => {
+   const { handleClick, isLoading } = props;
    useEffect(() => {
-      document.getElementById(`root`).focus(); ;
+      document.getElementById(`root`).focus();;
    }, []);
 
    return (
-      <button className={s.blueBtn} onClick={props.handleClick}>{props.title}</button>
+      <button className={s.blueBtn} onClick={props.handleClick}>
+         {
+            isLoading ?
+               <Loader /> :
+               <p>{props.title}</p>
+         }
+      </button>
    )
 }
 
