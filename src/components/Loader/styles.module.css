@@ -1,0 +1,41 @@
+.loader {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   cursor: pointer;
+   width: 34px;
+}
+
+.loader span {
+   height: 10px;
+   width: 10px;
+   background: #D9DDE1;
+   border-radius: 50%;
+}
+
+.lf {
+   animation: load 0.3s infinite ease-in-out;
+   animation-direction: alternate;
+}
+
+.ls {
+   animation: load 0.3s infinite 0.1s ease-in-out;
+   animation-direction: alternate;
+   -webkit-animation-delay: -0.1s;
+}
+
+.lt {
+   animation: load 0.3s infinite 0.2s ease-in-out;
+   animation-direction: alternate;
+   -webkit-animation-delay: -0.2s;
+}
+
+@keyframes load {
+   0% {
+      transform: scale(0);
+   }
+
+   100% {
+      transform: scale(1);
+   }
+}

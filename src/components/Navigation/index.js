@@ -53,7 +53,7 @@ const Navigation = props => {
 
             <Routes>
                <Route path="/*" element={<BlueButton title="Add new tip" handleClick={goTo} />} />
-               <Route path="/*" element={<BlueButton title="Save" handleClick={handleSaveClick} isLoading={isSaving}/>}>
+               <Route path="/*" element={<BlueButton title="Save" handleClick={handleSaveClick} isLoading={isSaving} />}>
                   <Route path="edit-post" element={<></>} />
                   <Route path="edit-post/:id" element={<></>} />
                </Route>

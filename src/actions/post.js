@@ -25,9 +25,21 @@ export const getPost = postId => {
 export const savePost = content => {
    return async (dispatch, getState) => {
       try {
-         await req.post(`/post`, { content });
+         const post = getState().post;
+         post.content = content;
 
-         // to do set blue btn loading here
+         if (!post.section.title) {
+            dispatch(setError(`Section title is required`));
+            return;
+         }
+
+         if (!post.shortTitle) {
+            dispatch(setError(`Post title is required`));
+            return;
+         }
+
+         await req.post(`/post`, post);
+         
          // redirect to main page on newly created post
       } catch (error) {
          dispatch(setError(error.message));

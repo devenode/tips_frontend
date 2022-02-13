@@ -33,7 +33,7 @@ const EditPost = props => {
    let sectionsOptions = [];
    if (sections.length) {
       sectionsOptions = sections.map(el => {
-         <Option key={el.id} title={el.title} handleClick={handleSectionClick} />
+         return <Option key={el.id} title={el.title} handleClick={handleSectionClick} />
       });
    }
 
