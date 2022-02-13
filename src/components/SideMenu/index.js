@@ -13,31 +13,37 @@ const SideMenu = props => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(getSections());
-   }, [dispatch]);
+      if (!sections.length) {
+         dispatch(getSections());
+      }
+      
+      if (sections.length) {
+         dispatch(setActiveSection(sections[0].id));
+      }
+   }, [dispatch, sections]);
 
    const handleSectionClick = e => {
-      if (activeSectionId === e.target.id) {
+      if (activeSectionId === Number(e.target.id)) {
          dispatch(setActiveSection(null));
          return;
       }
-      dispatch(setActiveSection(e.target.id));
+      dispatch(setActiveSection(Number(e.target.id)));
    }
 
    if (!chosenPostId && sections.length) {
-      chosenPostId = sections[0].posts[0];
+      chosenPostId = sections[0].Posts[0].id;
    }
 
    if (isLoading) {
       return (
          <div>Side menu is loading...</div>
-      )   
+      )
    }
 
    if (error) {
       return (
          <div>Side menu error: {error}</div>
-      )   
+      )
    }
 
    return (
@@ -55,11 +61,11 @@ const SideMenu = props => {
 
                      <ul className={s.postsBox}>
                         {
-                           section.posts.map(post => {
+                           section.Posts.map(post => {
                               return (
                                  <li key={post.id} className={post.id === chosenPostId ? s.activeSubsection : null}
                                  >
-                                    <Link to={`/post/${post.id}`}>{post.title}</Link>
+                                    <Link to={`/post/${post.id}`}>{post.shortTitle}</Link>
                                  </li>
                               )
                            })
@@ -73,4 +79,4 @@ const SideMenu = props => {
    )
 }
 
-export default SideMenu
+export default SideMenu;

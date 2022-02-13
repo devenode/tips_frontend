@@ -11,14 +11,11 @@ export const getPost = postId => {
    return async (dispatch, getState) => {
       try {
          const { data: post } = await req.get(`/post/${postId}`);
-
          dispatch(setPost(post));
-         dispatch(isPostLoading(false));
-
       } catch (error) {
          dispatch(setPostError(error.message));
-         dispatch(isPostLoading(false));
       }
+      dispatch(isPostLoading(false));
    }
 }
 
@@ -38,9 +35,9 @@ export const savePost = content => {
             return;
          }
 
-         await req.post(`/post`, post);
-         
-         // redirect to main page on newly created post
+         if (post.section.id) await req.put(`/post`, post);
+         else await req.post(`/post`, post);
+
       } catch (error) {
          dispatch(setError(error.message));
       }

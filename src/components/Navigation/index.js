@@ -18,7 +18,7 @@ const Navigation = props => {
 
    const goTo = useCallback(
       () => {
-         navigate(`/edit-post`)
+         navigate(`/edit-post`);
       },
       [navigate]
    );
@@ -30,12 +30,13 @@ const Navigation = props => {
             const content = JSON.stringify(editor.children);
             dispatch(savePost(content));
             setSaving(prev => false);
+            navigate(`/`);
          } catch (error) {
             dispatch(setError(error.message));
             setSaving(prev => false);
          }
       },
-      [editor, dispatch]
+      [editor, dispatch, navigate]
    );
 
    return (

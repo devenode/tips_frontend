@@ -9,7 +9,9 @@ import {
 const initState = {
    isLoading: true,
    error: null,
-   section: {}
+   post: {
+      section: {}
+   }
 }
 
 export const post = (state = initState, action) => {
@@ -21,22 +23,32 @@ export const post = (state = initState, action) => {
          return { ...state, error: action.msg }
 
       case POST_SET:
-         return { ...state, ...action.post }
-
+         return {
+            ...state,
+            post: {
+               ...action.post
+            }
+         }
 
       case POST_SET_SECTION_TITLE:
          return {
             ...state,
-            section: {
-               ...state.section,
-               title: action.title
+            post: {
+               ...state.post,
+               section: {
+                  ...state.post.section,
+                  title: action.title
+               }
             }
          }
 
       case POST_SET_SHORT_TITLE:
          return {
             ...state,
-            shortTitle: action.title
+            post: {
+               ...state.post,
+               shortTitle: action.title
+            }
          }
 
       default: return state;
