@@ -8,7 +8,8 @@ import BlueButton from '../BlueButton';
 import s from './styles.module.css';
 import { useSlate } from 'slate-react';
 import { setError } from '../../actions/error';
-import { savePost } from '../../actions/post';
+import { savePost, setPost } from '../../actions/post';
+import { initState } from '../../reducers/post';
 
 const Navigation = props => {
    const navigate = useNavigate();
@@ -18,9 +19,10 @@ const Navigation = props => {
 
    const goTo = useCallback(
       () => {
+         dispatch(setPost(initState.post));
          navigate(`/edit-post`);
       },
-      [navigate]
+      [dispatch, navigate]
    );
 
    const handleSaveClick = useCallback(

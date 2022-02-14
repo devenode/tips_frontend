@@ -6,11 +6,14 @@ import {
    POST_SET_SHORT_TITLE
 } from '../actions/post';
 
-const initState = {
+export const initState = {
    isLoading: true,
    error: null,
    post: {
-      section: {}
+      shortTitle: null,
+      Section: {
+         title: null
+      }
    }
 }
 
@@ -35,7 +38,7 @@ export const post = (state = initState, action) => {
             ...state,
             post: {
                ...state.post,
-               section: {
+               Section: {
                   ...state.post.section,
                   title: action.title
                }

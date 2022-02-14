@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import TextEditor from '../../components/TextEditor';
 import Dropdown from '../../components/Dropdown';
 import s from './styles.module.css';
 import { setPostSection, setPostShortTitle } from '../../actions/post';
 import { getSections } from '../../actions/sections';
+import { getPost, isPostLoading } from '../../actions/post';
 
 const EditPost = props => {
+   const { postId } = useParams();
    const { sections } = useSelector(state => state.sections);
-   const { shortTitle, section: { title: sectionTitle } } = useSelector(state => state.post);
+   const { isLoading, error, post: { id, shortTitle, Section: { title: sectionTitle } } } = useSelector(state => state.post);
+
    const dispatch = useDispatch();
 
    const handleSectionChange = e => {
@@ -24,12 +28,30 @@ const EditPost = props => {
    }
 
    useEffect(() => {
-      dispatch(getSections());
-      
-   }, [dispatch]);
+      if (!sections.length) {
+         dispatch(getSections());
+      }
+
+      if (!id && postId) {
+         dispatch(getPost(postId));
+      }
+
+      if (!id && !postId) {
+         dispatch(isPostLoading(false));
+      }
+
+   }, [dispatch, sections, id, postId]);
+
+   if (isLoading) {
+      return <div>Post is loading...</div>
+   }
+
+   if (error) {
+      return <div>Error: {error}</div>
+   }
 
    const sectionTitleInput = <Input placeholder="Section title..." value={sectionTitle} handleChange={handleSectionChange} />
- 
+
    let sectionsOptions = [];
    if (sections.length) {
       sectionsOptions = sections.map(el => {
