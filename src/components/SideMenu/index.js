@@ -1,10 +1,10 @@
 import s from './styles.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import arrow from '../../icons/arrow-down.svg';
 import { getSections, setActiveSection } from '../../actions/sections';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { getPost, setPostError, isPostLoading } from '../../actions/post';
 
 const SideMenu = props => {
    let { postId: chosenPostId } = useParams();
@@ -12,15 +12,34 @@ const SideMenu = props => {
    const { isLoading, error, sections, activeSectionId } = useSelector(state => state.sections);
    const dispatch = useDispatch();
 
+   if (!chosenPostId && sections.length) {
+      chosenPostId = sections[0].Posts[0].id;
+   }
+
    useEffect(() => {
       if (!sections.length) {
          dispatch(getSections());
       }
-      
+
       if (sections.length) {
-         dispatch(setActiveSection(sections[0].id));
+         if (!chosenPostId) {
+            dispatch(setActiveSection(sections[0].id));
+         }
+         if (chosenPostId) {
+            const section = sections.find(sec => !!sec.Posts.find(post => post.id === Number(chosenPostId)));
+            
+            if (!section) {
+               dispatch(setPostError(`No such post...`));
+               dispatch(isPostLoading(false));
+               return;
+            } 
+
+            dispatch(getPost(chosenPostId));
+            dispatch(setActiveSection(section.id));
+         }  
       }
-   }, [dispatch, sections]);
+      
+   }, [dispatch, sections, chosenPostId]);
 
    const handleSectionClick = e => {
       if (activeSectionId === Number(e.target.id)) {
@@ -28,10 +47,6 @@ const SideMenu = props => {
          return;
       }
       dispatch(setActiveSection(Number(e.target.id)));
-   }
-
-   if (!chosenPostId && sections.length) {
-      chosenPostId = sections[0].Posts[0].id;
    }
 
    if (isLoading) {
@@ -47,7 +62,7 @@ const SideMenu = props => {
    }
 
    return (
-      <ul className={s.sideMenuBox}>
+      <ul className={`noselect ${s.sideMenuBox}`}>
          {
             sections.map(section => {
                return (
@@ -55,7 +70,7 @@ const SideMenu = props => {
                   >
                      <div>
                         <img src={arrow} alt="Arrow down" />
-                        <div className={s.dot}></div>
+                        <div className={s.dot}><div></div></div>
                         <p id={section.id} onClick={handleSectionClick} >{section.title}</p>
                      </div>
 
@@ -63,7 +78,7 @@ const SideMenu = props => {
                         {
                            section.Posts.map(post => {
                               return (
-                                 <li key={post.id} className={post.id === chosenPostId ? s.activeSubsection : null}
+                                 <li key={post.id} className={post.id === Number(chosenPostId) ? s.activeSubsection : null}
                                  >
                                     <Link to={`/post/${post.id}`}>{post.shortTitle}</Link>
                                  </li>

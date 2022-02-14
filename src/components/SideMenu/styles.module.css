@@ -1,13 +1,15 @@
 .dot {
+   width: 8px;
+}
+.dot > div {
    height: 4px;
    width: 4px;
    border-radius: 4px;
    background-color: #A1A9B8;
-   margin-left: -1px;
+   margin-left: 1px;
 }
 .sideMenuBox > li > div > img {
    display: none;
-   margin-left: -2.5px;
 }
 .sideMenuBox > li > div > p {
    color: #A1A9B8;
@@ -25,6 +27,7 @@
 .postsBox {
    padding: 8px 0 8px 30px;
    border-left: 2px solid #fff;
+   margin-left: 2.5px;
 }
 .postsBox > li {
    display: none;

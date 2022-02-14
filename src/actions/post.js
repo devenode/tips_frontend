@@ -12,6 +12,7 @@ export const getPost = postId => {
       try {
          const { data: post } = await req.get(`/post/${postId}`);
          dispatch(setPost(post));
+         dispatch(setPostError(null));
       } catch (error) {
          dispatch(setPostError(error.message));
       }

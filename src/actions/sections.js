@@ -10,6 +10,7 @@ export const getSections = () => {
       try {
          const { data: sections } = await req.get(`/sections`);
          dispatch(setSections(sections));
+         dispatch(setSectionsError(null));
       } catch (error) {
          dispatch(setSectionsError(error.message));
       }
