@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useSlate } from 'slate-react';
 import { useParams } from 'react-router-dom';
 import TextEditor from '../../components/TextEditor';
 import Dropdown from '../../components/Dropdown';
@@ -9,9 +10,10 @@ import { getSections } from '../../actions/sections';
 import { getPost, isPostLoading } from '../../actions/post';
 
 const EditPost = props => {
+   const editor = useSlate();
    const { postId } = useParams();
    const { sections } = useSelector(state => state.sections);
-   const { isLoading, error, post: { id, shortTitle, Section: { title: sectionTitle } } } = useSelector(state => state.post);
+   const { isLoading, error, post: { id, shortTitle, content, Section: { title: sectionTitle } } } = useSelector(state => state.post);
 
    const dispatch = useDispatch();
 
@@ -31,7 +33,9 @@ const EditPost = props => {
       if (!sections.length) {
          dispatch(getSections());
       }
+   }, [dispatch, sections]);
 
+   useEffect(() => {
       if (!id && postId) {
          dispatch(getPost(postId));
       }
@@ -39,8 +43,13 @@ const EditPost = props => {
       if (!id && !postId) {
          dispatch(isPostLoading(false));
       }
+   }, [dispatch, id, postId]);
 
-   }, [dispatch, sections, id, postId]);
+   useEffect(() => {
+      if (content) {
+         editor.children = JSON.parse(content);
+      }
+   }, [editor, content]);
 
    if (isLoading) {
       return <div>Post is loading...</div>
