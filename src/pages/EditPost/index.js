@@ -62,7 +62,7 @@ const EditPost = props => {
       return <div>Error: {error}</div>
    }
 
-   const sectionTitleInput = <Input placeholder="Section title..." value={sectionTitle} handleChange={handleSectionChange} />
+   const sectionTitleInput = <Input placeholder="Section title..." maxLength="50" value={sectionTitle} handleChange={handleSectionChange} />
 
    let sectionsOptions = [];
    if (sections.length) {
@@ -75,7 +75,7 @@ const EditPost = props => {
       <>
          <div className={s.postTitlesBox}>
             <Dropdown options={sectionsOptions} label={sectionTitleInput} optionsClasses={s.optionsList} />
-            <Input placeholder="Short post title..." value={shortTitle} handleChange={handleShortChange} />
+            <Input placeholder="Short post title..." maxLength="50" value={shortTitle} handleChange={handleShortChange} />
          </div>
          <TextEditor />
       </>
@@ -83,10 +83,11 @@ const EditPost = props => {
 }
 
 const Input = props => {
-   const { value, placeholder, handleChange } = props;
+   const { value, placeholder, handleChange, maxLength } = props;
 
    return (
       <input
+         maxLength={maxLength}
          type="text"
          placeholder={placeholder}
          value={value || ``}
