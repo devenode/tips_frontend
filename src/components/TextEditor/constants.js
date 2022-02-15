@@ -91,3 +91,8 @@ export const EMPTY_DOC = [
       children: [{ text: `` }],
    },
 ];
+
+export const ZERO_SELECTION = {
+   anchor: { path: [0, 0], offset: 0 },
+   focus: { path: [0, 0], offset: 0 }
+}

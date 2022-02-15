@@ -11,7 +11,7 @@ import { setError } from '../../actions/error';
 import { createPost, setPost } from '../../actions/post';
 import { getSections } from '../../actions/sections';
 import { initState } from '../../reducers/post';
-import { EMPTY_DOC } from '../TextEditor/constants';
+import { EMPTY_DOC, ZERO_SELECTION } from '../TextEditor/constants';
 
 const Navigation = props => {
    const editor = useSlate();
@@ -24,37 +24,38 @@ const Navigation = props => {
       () => {
          dispatch(setPost(initState.post));
          editor.children = EMPTY_DOC;
+         editor.selection = ZERO_SELECTION;
          navigate(`/edit-post`);
       },
       [dispatch, navigate, editor]
    );
 
    const handleSaveClick = useCallback(async (e) => {
-         try {
-            if (!post.section.title) {
-               dispatch(setError([`Section title is required`]));
-               return;
-            }
-
-            if (!post.shortTitle) {
-               dispatch(setError([`Post title is required`]));
-               return;
-            }
-
-            setSaving(prev => true);
-            const content = JSON.stringify(editor.children);
-            post.content = content;
-            const newPost = await createPost(post);
-            dispatch(getSections());
-            navigate(`/post/${newPost.id}`);
-
-         } catch (error) {
-            if (error.response && error.response.data) dispatch(setError(error.response.data));
-            else dispatch(setError([error.message]));
+      try {
+         if (!post.section.title) {
+            dispatch(setError([`Section title is required`]));
+            return;
          }
-         setSaving(prev => false);
-         
-      }, [dispatch, editor, navigate, post]
+
+         if (!post.shortTitle) {
+            dispatch(setError([`Post title is required`]));
+            return;
+         }
+
+         setSaving(prev => true);
+         const content = JSON.stringify(editor.children);
+         post.content = content;
+         const newPost = await createPost(post);
+         dispatch(getSections());
+         navigate(`/post/${newPost.id}`);
+
+      } catch (error) {
+         if (error.response && error.response.data) dispatch(setError(error.response.data));
+         else dispatch(setError([error.message]));
+      }
+      setSaving(prev => false);
+
+   }, [dispatch, editor, navigate, post]
    );
 
    return (
