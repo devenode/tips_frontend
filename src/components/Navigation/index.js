@@ -32,12 +32,12 @@ const Navigation = props => {
    const handleSaveClick = useCallback(async (e) => {
          try {
             if (!post.section.title) {
-               dispatch(setError(`Section title is required`));
+               dispatch(setError([`Section title is required`]));
                return;
             }
 
             if (!post.shortTitle) {
-               dispatch(setError(`Post title is required`));
+               dispatch(setError([`Post title is required`]));
                return;
             }
 
@@ -49,7 +49,8 @@ const Navigation = props => {
             navigate(`/post/${newPost.id}`);
 
          } catch (error) {
-            dispatch(setError(error.message));
+            if (error.response && error.response.data) dispatch(setError(error.response.data));
+            else dispatch(setError([error.message]));
          }
          setSaving(prev => false);
          

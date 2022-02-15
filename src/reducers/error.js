@@ -2,13 +2,13 @@ import { ERROR_CHANGE } from '../actions/error';
 
 
 const initState = {
-   msg: ``,
+   msg: [],
 }
 
 export const error = (state = initState, action) => {
    switch (action.type) {
       case ERROR_CHANGE:
-         return { ...state, msg: action.msg }
+         return { ...state, msg: action.arr }
 
       default: return state;
    }

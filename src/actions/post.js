@@ -13,7 +13,8 @@ export const getPost = postId => {
          dispatch(setPost(post));
          dispatch(setPostError(null));
       } catch (error) {
-         dispatch(setPostError(error.message));
+         if (error.response && error.response.data) dispatch(setPostError(error.response.data));
+         else dispatch(setPostError(error.message));
       }
       dispatch(isPostLoading(false));
    }

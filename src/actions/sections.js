@@ -12,7 +12,8 @@ export const getSections = () => {
          dispatch(setSections(sections));
          dispatch(setSectionsError(null));
       } catch (error) {
-         dispatch(setSectionsError(error.message));
+         if (error.response && error.response.data) dispatch(setSectionsError(error.response.data));
+         else dispatch(setSectionsError(error.message));
       }
       dispatch(isSectionsLoading(false));
    }

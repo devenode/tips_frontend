@@ -9,7 +9,7 @@
     justify-content: center;
     padding: 12px 10px;
 }
-.errorBox > p {
+.errorBox > div > p {
     max-width: 400px;
     color: #7e2a02;
     font-size: .85rem;
