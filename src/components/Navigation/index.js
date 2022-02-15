@@ -10,6 +10,7 @@ import { useSlate } from 'slate-react';
 import { setError } from '../../actions/error';
 import { savePost, setPost } from '../../actions/post';
 import { initState } from '../../reducers/post';
+import { EMPTY_DOC } from '../TextEditor/constants';
 
 const Navigation = props => {
    const navigate = useNavigate();
@@ -20,9 +21,10 @@ const Navigation = props => {
    const goTo = useCallback(
       () => {
          dispatch(setPost(initState.post));
+         editor.children = EMPTY_DOC;
          navigate(`/edit-post`);
       },
-      [dispatch, navigate]
+      [dispatch, navigate, editor]
    );
 
    const handleSaveClick = useCallback(

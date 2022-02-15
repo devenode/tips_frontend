@@ -13,7 +13,10 @@ const EditPost = props => {
    const editor = useSlate();
    const { postId } = useParams();
    const { sections } = useSelector(state => state.sections);
-   const { isLoading, error, post: { id, shortTitle, content, Section: { title: sectionTitle } } } = useSelector(state => state.post);
+   const { isLoading, error, 
+      post: { id, shortTitle, content, 
+         section: { title: sectionTitle
+   } } } = useSelector(state => state.post);
 
    const dispatch = useDispatch();
 

@@ -13,7 +13,7 @@ const SideMenu = props => {
    const dispatch = useDispatch();
 
    if (!chosenPostId && sections.length) {
-      chosenPostId = sections[0].Posts[0].id;
+      chosenPostId = sections[0].posts[0].id;
    }
 
    useEffect(() => {

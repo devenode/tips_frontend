@@ -11,7 +11,7 @@ export const initState = {
    error: null,
    post: {
       shortTitle: null,
-      Section: {
+      section: {
          title: null
       }
    }
@@ -38,7 +38,7 @@ export const post = (state = initState, action) => {
             ...state,
             post: {
                ...state.post,
-               Section: {
+               section: {
                   ...state.post.section,
                   title: action.title
                }
