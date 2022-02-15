@@ -1,5 +1,4 @@
 import req from '../utils/axios';
-import { setError } from './error';
 
 export const POST_LOADING = `POST/LOADING`;
 export const POST_ERROR = `POST/ERROR`;
@@ -20,29 +19,9 @@ export const getPost = postId => {
    }
 }
 
-export const savePost = content => {
-   return async (dispatch, getState) => {
-      try {
-         const post = getState().post;
-         post.content = content;
-
-         if (!post.section.title) {
-            dispatch(setError(`Section title is required`));
-            return;
-         }
-
-         if (!post.shortTitle) {
-            dispatch(setError(`Post title is required`));
-            return;
-         }
-
-         if (post.section.id) await req.put(`/post`, post);
-         else await req.post(`/post`, post);
-
-      } catch (error) {
-         dispatch(setError(error.message));
-      }
-   }
+export const createPost = async post => {
+   const newPost = await req.post(`/post`, post);
+   return newPost.data;
 }
 
 export const isPostLoading = isLoading => {

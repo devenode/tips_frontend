@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Logo from '../Logo';
 import Search from '../Search';
@@ -8,15 +8,17 @@ import BlueButton from '../BlueButton';
 import s from './styles.module.css';
 import { useSlate } from 'slate-react';
 import { setError } from '../../actions/error';
-import { savePost, setPost } from '../../actions/post';
+import { createPost, setPost } from '../../actions/post';
+import { getSections } from '../../actions/sections';
 import { initState } from '../../reducers/post';
 import { EMPTY_DOC } from '../TextEditor/constants';
 
 const Navigation = props => {
-   const navigate = useNavigate();
    const editor = useSlate();
-   const dispatch = useDispatch();
    const [isSaving, setSaving] = useState(false);
+   const { post } = useSelector(state => state.post);
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
 
    const goTo = useCallback(
       () => {
@@ -27,20 +29,31 @@ const Navigation = props => {
       [dispatch, navigate, editor]
    );
 
-   const handleSaveClick = useCallback(
-      (e) => {
+   const handleSaveClick = useCallback(async (e) => {
          try {
+            if (!post.section.title) {
+               dispatch(setError(`Section title is required`));
+               return;
+            }
+
+            if (!post.shortTitle) {
+               dispatch(setError(`Post title is required`));
+               return;
+            }
+
             setSaving(prev => true);
             const content = JSON.stringify(editor.children);
-            dispatch(savePost(content));
-            setSaving(prev => false);
-            navigate(`/`);
+            post.content = content;
+            const newPost = await createPost(post);
+            dispatch(getSections());
+            navigate(`/post/${newPost.id}`);
+
          } catch (error) {
             dispatch(setError(error.message));
-            setSaving(prev => false);
          }
-      },
-      [editor, dispatch, navigate]
+         setSaving(prev => false);
+         
+      }, [dispatch, editor, navigate, post]
    );
 
    return (

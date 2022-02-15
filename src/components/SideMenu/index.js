@@ -26,7 +26,7 @@ const SideMenu = props => {
             dispatch(setActiveSection(sections[0].id));
          }
          if (chosenPostId) {
-            const section = sections.find(sec => !!sec.Posts.find(post => post.id === Number(chosenPostId)));
+            const section = sections.find(sec => !!sec.posts.find(post => post.id === Number(chosenPostId)));
             
             if (!section) {
                dispatch(setPostError(`No such post...`));
@@ -76,7 +76,7 @@ const SideMenu = props => {
 
                      <ul className={s.postsBox}>
                         {
-                           section.Posts.map(post => {
+                           section.posts.map(post => {
                               return (
                                  <li key={post.id} className={post.id === Number(chosenPostId) ? s.activeSubsection : null}
                                  >
