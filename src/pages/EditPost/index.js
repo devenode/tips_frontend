@@ -13,10 +13,10 @@ const EditPost = props => {
    const editor = useSlate();
    const { postId } = useParams();
    const { sections } = useSelector(state => state.sections);
-   const { isLoading, error, 
-      post: { id, shortTitle, content, 
+   const { isLoading, error,
+      post: { id, shortTitle, content,
          section: { title: sectionTitle
-   } } } = useSelector(state => state.post);
+         } } } = useSelector(state => state.post);
 
    const dispatch = useDispatch();
 
@@ -62,13 +62,27 @@ const EditPost = props => {
       return <div>Error: {error}</div>
    }
 
-   const sectionTitleInput = <Input placeholder="Section title..." maxLength="50" value={sectionTitle} handleChange={handleSectionChange} />
+   const sectionTitleInput = <Input
+      placeholder="Section title..."
+      maxLength="50"
+      value={sectionTitle}
+      handleChange={handleSectionChange} />
 
    let sectionsOptions = [];
    if (sections.length) {
-      sectionsOptions = sections.map(el => {
-         return <Option key={el.id} title={el.title} handleClick={handleSectionClick} />
-      });
+      if (sectionTitle) {
+         sectionsOptions = sections.filter(el => {
+            const lowerTitle = el.title.toLowerCase();
+            const lowerInput = sectionTitle.toLowerCase();
+            return lowerTitle.indexOf(lowerInput) !== -1;
+         }).map(el => {
+            return <Option key={el.id} title={el.title} handleClick={handleSectionClick} />
+         });
+      } else {
+         sectionsOptions = sections.map(el => {
+            return <Option key={el.id} title={el.title} handleClick={handleSectionClick} />
+         });
+      }
    }
 
    return (

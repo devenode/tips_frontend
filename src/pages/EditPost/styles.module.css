@@ -20,6 +20,8 @@
 .optionsList {
    width: 100%;
    top: 25px;
+   max-height: 200px;
+   overflow-y: auto;
 }
 
 .optionsList > p {

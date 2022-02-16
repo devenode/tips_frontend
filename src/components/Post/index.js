@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { serializeToJSX } from '../TextEditor/utils';
 import s from '../TextEditor/styles.module.css';
+import { EMPTY_DOC } from '../TextEditor/constants';
 
 const Post = props => {
    const { isLoading, error, post } = useSelector(state => state.post);
@@ -14,7 +15,7 @@ const Post = props => {
       return <div>Error: {error}</div>
    }
 
-   const children = JSON.parse(post.content);
+   const children = post.content ? JSON.parse(post.content) : EMPTY_DOC;
 
    return (
       <div className={s.editorBox}>
