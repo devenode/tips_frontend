@@ -39,7 +39,7 @@ const EditPost = props => {
    }, [dispatch, sections]);
 
    useEffect(() => {
-      if (!id && postId) {
+      if (postId) {
          dispatch(getPost(postId));
       }
 
@@ -66,10 +66,10 @@ const EditPost = props => {
       placeholder="Section title..."
       maxLength="50"
       value={sectionTitle}
-      handleChange={handleSectionChange} />
+      handleChange={postId ? () => {} : handleSectionChange} />
 
    let sectionsOptions = [];
-   if (sections.length) {
+   if (sections.length && !postId) {
       if (sectionTitle) {
          sectionsOptions = sections.filter(el => {
             const lowerTitle = el.title.toLowerCase();

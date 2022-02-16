@@ -88,3 +88,9 @@
 .editorBox span[data-slate-placeholder="true"] {
    color: #A1A9B8;
 }
+
+.editLink {
+   font-size: .85rem;
+   margin: 0 0 10px 0;
+   display: block;
+}
