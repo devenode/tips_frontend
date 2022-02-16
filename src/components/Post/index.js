@@ -1,4 +1,7 @@
+import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
+import { serializeToJSX } from '../TextEditor/utils';
+import s from '../TextEditor/styles.module.css';
 
 const Post = props => {
    const { isLoading, error, post } = useSelector(state => state.post);
@@ -11,9 +14,11 @@ const Post = props => {
       return <div>Error: {error}</div>
    }
 
+   const children = JSON.parse(post.content);
+
    return (
-      <div>
-         {JSON.stringify(post)}
+      <div className={s.editorBox}>
+         {children.map((el, i) => <Fragment key={i}>{serializeToJSX(el)}</Fragment>)}
       </div>
    )
 }

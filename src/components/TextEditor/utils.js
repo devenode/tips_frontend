@@ -1,6 +1,8 @@
-import { Editor, Transforms, Node } from 'slate';
+import { Editor, Transforms, Node, Text } from 'slate';
 import { useSlate } from 'slate-react';
-import { useState, useCallback } from 'react';
+import { Fragment, useState, useCallback } from 'react';
+import Block from './Block';
+import Leaf from './Leaf';
 
 export const getTextStyle = editor => {
    const styles = Editor.marks(editor);
@@ -65,8 +67,17 @@ export const getSelectedText = editor => {
    return selectedText;
 }
 
-export const serialize = nodes => {
+export const serializeToText = nodes => {
    return nodes.map(n => Node.string(n)).join('\n')
+}
+
+export const serializeToJSX = node => {
+   if (Text.isText(node)) {
+      return <Leaf leaf={node} children={node.text} />
+   }
+
+   const children = node.children.map((n, i) => <Fragment key={i}>{serializeToJSX(n)}</ Fragment>);
+   return <Block element={node} children={children} />
 }
 
 export const useSelection = initSelection => {

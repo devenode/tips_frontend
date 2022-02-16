@@ -221,15 +221,16 @@ a:hover {
 
 .two-clmns {
    display: flex;
+   justify-content: space-between;
 }
 
 .two-clmns>div:first-of-type {
-   flex-basis: calc(27% - 20px);
    margin: 0 20px 0 0;
 }
 
 .two-clmns>div:last-of-type {
-   flex-basis: 73%;
+   flex: 1;
+   max-width: 700px;
 }
 
 .one-clmn {
