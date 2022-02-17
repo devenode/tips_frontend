@@ -9,6 +9,7 @@ export const POST_SET_SHORT_TITLE = `POST/SET_SHORT_TITLE`;
 export const getPost = postId => {
    return async (dispatch, getState) => {
       try {
+         dispatch(isPostLoading(true));
          const { data: post } = await req.get(`/post/${postId}`);
          dispatch(setPost(post));
          dispatch(setPostError(null));

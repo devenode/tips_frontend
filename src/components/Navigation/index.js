@@ -15,10 +15,10 @@ import { EMPTY_DOC, ZERO_SELECTION } from '../TextEditor/constants';
 
 const Navigation = props => {
    const editor = useSlate();
-   const [isSaving, setSaving] = useState(false);
-   const { post } = useSelector(state => state.post);
    const dispatch = useDispatch();
    const navigate = useNavigate();
+   const [isSaving, setSaving] = useState(false);
+   const { post } = useSelector(state => state.post);
 
    const goTo = useCallback(
       () => {
@@ -30,32 +30,34 @@ const Navigation = props => {
       [dispatch, navigate, editor]
    );
 
-   const handleSaveClick = useCallback(async (e) => {
-      try {
-         if (!post.section.title) {
-            dispatch(setError([`Section title is required`]));
-            return;
+   const handleSaveClick = useCallback(
+      async (e) => {
+         try {
+            if (!post.section.title) {
+               dispatch(setError([`Section title is required`]));
+               return;
+            }
+
+            if (!post.shortTitle) {
+               dispatch(setError([`Post title is required`]));
+               return;
+            }
+
+            setSaving(prev => true);
+            const content = JSON.stringify(editor.children);
+            post.content = content;
+            const newPost = await createPost(post);
+            dispatch(getSections());
+            navigate(`/post/${newPost.id}`);
+
+         } catch (error) {
+            if (error.response && error.response.data) dispatch(setError(error.response.data));
+            else dispatch(setError([error.message]));
          }
+         setSaving(prev => false);
 
-         if (!post.shortTitle) {
-            dispatch(setError([`Post title is required`]));
-            return;
-         }
-
-         setSaving(prev => true);
-         const content = JSON.stringify(editor.children);
-         post.content = content;
-         const newPost = await createPost(post);
-         dispatch(getSections());
-         navigate(`/post/${newPost.id}`);
-
-      } catch (error) {
-         if (error.response && error.response.data) dispatch(setError(error.response.data));
-         else dispatch(setError([error.message]));
-      }
-      setSaving(prev => false);
-
-   }, [dispatch, editor, navigate, post]
+      },
+      [dispatch, editor, navigate, post]
    );
 
    return (
@@ -82,6 +84,5 @@ const Navigation = props => {
       </nav>
    )
 }
-
 
 export default Navigation;

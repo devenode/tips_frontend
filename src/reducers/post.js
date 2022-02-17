@@ -7,7 +7,7 @@ import {
 } from '../actions/post';
 
 export const initState = {
-   isLoading: true,
+   isLoading: false,
    error: null,
    post: {
       shortTitle: null,

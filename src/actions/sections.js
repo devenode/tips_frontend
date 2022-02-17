@@ -8,6 +8,7 @@ export const SECTIONS_SET_ACTIVE_SECTION = `SECTIONS/SET_ACTIVE_SECTION`;
 export const getSections = () => {
    return async (dispatch, getState) => {
       try {
+         dispatch(isSectionsLoading(true));
          const { data: sections } = await req.get(`/sections`);
          dispatch(setSections(sections));
          dispatch(setSectionsError(null));

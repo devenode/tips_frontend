@@ -5,13 +5,10 @@ import MainLayout from './layouts/MainLayout';
 import WithMenuLayout from './layouts/WithMenuLayout';
 import NoMenuLayout from './layouts/NoMenuLayout';
 import Error404 from './pages/Error404';
-import { PostWithEdit } from './components/Post';
+import Post from './components/Post';
 import SlateContext from './components/TextEditor/context';
 import Error from './components/Error';
 const EditPost = React.lazy(() => import('./pages/EditPost'));
-
-
-
 
 const App = () => {
    return (
@@ -21,8 +18,8 @@ const App = () => {
             <Route path="/*" element={<MainLayout />}>
 
                <Route path="/*" element={<WithMenuLayout />}>
-                  <Route index element={<PostWithEdit />} />
-                  <Route path="post/:postId" element={<PostWithEdit />} />
+                  <Route index element={<Post />} />
+                  <Route path="post/:postId" element={<Post />} />
                </Route>
 
                <Route path="/*" element={<NoMenuLayout />}>
@@ -36,6 +33,5 @@ const App = () => {
       </SlateContext>
    )
 }
-
 
 export default App;

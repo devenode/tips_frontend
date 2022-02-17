@@ -6,7 +6,7 @@ import {
 } from '../actions/sections';
 
 const initState = {
-   isLoading: true,
+   isLoading: false,
    error: null,
    sections: [],
    activeSectionId: null

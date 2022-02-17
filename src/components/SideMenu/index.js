@@ -1,52 +1,57 @@
+import { useCallback, useEffect } from 'react';
 import s from './styles.module.css';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import arrow from '../../icons/arrow-down.svg';
 import { getSections, setActiveSection } from '../../actions/sections';
-import { useEffect } from 'react';
-import { getPost, setPostError, isPostLoading } from '../../actions/post';
+
 
 const SideMenu = props => {
-   let { postId: chosenPostId } = useParams();
+   let { postId } = useParams();
 
    const { isLoading, error, sections, activeSectionId } = useSelector(state => state.sections);
    const dispatch = useDispatch();
 
-   if (!chosenPostId && sections.length) {
-      chosenPostId = sections[0].posts[0].id;
+   if (!postId && sections.length) {
+      postId = sections[0].posts[0].id;
    }
 
-   useEffect(() => {
-      if (!sections.length) {
-         dispatch(getSections());
-      }
-
-      if (sections.length) {
-         if (!chosenPostId) {
-            dispatch(setActiveSection(sections[0].id));
+   useEffect(
+      () => {
+         if (!sections.length) {
+            dispatch(getSections());
          }
-         if (chosenPostId) {
-            const section = sections.find(sec => !!sec.posts.find(post => post.id === Number(chosenPostId)));
+
+         if (sections.length) {
+            if (!postId) {
+               dispatch(setActiveSection(sections[0].id));
+            }
             
-            if (!section) {
-               dispatch(setPostError(`No such post...`));
-               dispatch(isPostLoading(false));
-               return;
-            } 
+            if (postId) {
+               const section = sections.find(sec => !!sec.posts.find(post => post.id === Number(postId)));
+               if (section) dispatch(setActiveSection(section.id));
+            }
+         }
+      },
+      [dispatch, sections, postId]
+   );
 
-            dispatch(getPost(chosenPostId));
-            dispatch(setActiveSection(section.id));
-         }  
-      }
-      
-   }, [dispatch, sections, chosenPostId]);
+   const handleSectionClick = useCallback(
+      (e) => {
+         if (activeSectionId === Number(e.target.id)) {
+            dispatch(setActiveSection(null));
+            return;
+         }
+         
+         dispatch(setActiveSection(Number(e.target.id)));
+      },
+      [dispatch, activeSectionId]
+   );
 
-   const handleSectionClick = e => {
-      if (activeSectionId === Number(e.target.id)) {
-         dispatch(setActiveSection(null));
-         return;
-      }
-      dispatch(setActiveSection(Number(e.target.id)));
+   if (!isLoading && !error && !sections.length) {
+      return (
+         <div>Sections fetching isn't started...</div>
+      )
    }
 
    if (isLoading) {
@@ -78,7 +83,7 @@ const SideMenu = props => {
                         {
                            section.posts.map(post => {
                               return (
-                                 <li key={post.id} className={post.id === Number(chosenPostId) ? s.activeSubsection : null}
+                                 <li key={post.id} className={post.id === Number(postId) ? s.activeSubsection : null}
                                  >
                                     <Link to={`/post/${post.id}`}>{post.shortTitle}</Link>
                                  </li>
