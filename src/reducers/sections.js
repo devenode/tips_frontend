@@ -6,9 +6,9 @@ import {
 } from '../actions/sections';
 
 const initState = {
-   isLoading: false,
+   isLoading: true,
    error: null,
-   sections: [],
+   sections: null,
    activeSectionId: null
 }
 

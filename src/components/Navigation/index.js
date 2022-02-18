@@ -22,9 +22,9 @@ const Navigation = props => {
 
    const goTo = useCallback(
       () => {
-         dispatch(setPost(initState.post));
          editor.children = EMPTY_DOC;
          editor.selection = ZERO_SELECTION;
+         dispatch(setPost(initState.post));
          navigate(`/edit-post`);
       },
       [dispatch, navigate, editor]

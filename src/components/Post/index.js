@@ -1,32 +1,51 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { serializeToJSX } from '../TextEditor/utils';
 import { EMPTY_DOC } from '../TextEditor/constants';
-import { useSelector, useDispatch } from 'react-redux';
-import { getPost } from '../../actions/post';
+import { useSelector } from 'react-redux';
 import s from '../TextEditor/styles.module.css';
+import req from '../../utils/axios';
 
 const Post = props => {
    let { postId } = useParams();
    const { sections } = useSelector(state => state.sections);
-   const { isLoading, error, post } = useSelector(state => state.post);
-   const dispatch = useDispatch();
-
-   postId = postId || sections[0]?.posts[0]?.id;
-   const children = post.content ? JSON.parse(post.content) : EMPTY_DOC;
-
+   const [{ isLoading, error, post }, setPost] = useState({
+      isLoading: true,
+      error: null,
+      post: null
+   });
+   
+   if (!postId && sections) postId = sections[0]?.posts[0].id;
+   const children = post ? JSON.parse(post.content) : EMPTY_DOC;
+   
    useEffect(
       () => {
-         if (!postId) return;
-
-         dispatch(getPost(postId));
+         (async() => {
+            try {
+               if (!postId) return;
+               setPost(prev => { return { ...prev, isLoading: true }});
+               const { data: post } = await req.get(`/post/${postId}`);
+               setPost(prev => {
+                  return {
+                     ...prev,
+                     isLoading: false,
+                     error: null,
+                     post
+                  }
+               });
+            } catch (error) {
+               setPost(prev => {
+                  return {
+                     ...prev,
+                     isLoading: false,
+                     error: error.response?.data ? error.response.data : error.message,
+                  }
+               });
+            }
+         })();
       },
-      [dispatch, postId]
+      [postId]
    );
-
-   if (!isLoading && !error && !post.id) {
-      return <div>Nothing to show yet...</div>
-   }
 
    if (isLoading) {
       return <div>Post is Loading...</div>

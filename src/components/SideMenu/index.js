@@ -5,21 +5,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import arrow from '../../icons/arrow-down.svg';
 import { getSections, setActiveSection } from '../../actions/sections';
 
-
 const SideMenu = props => {
    let { postId } = useParams();
 
    const { isLoading, error, sections, activeSectionId } = useSelector(state => state.sections);
    const dispatch = useDispatch();
 
-   if (!postId && sections.length) {
-      postId = sections[0].posts[0].id;
-   }
+   if (!postId && sections) postId = sections[0]?.posts[0].id;
 
    useEffect(
       () => {
-         if (!sections.length) {
+         if (!sections) {
             dispatch(getSections());
+            return;
          }
 
          if (sections.length) {
@@ -48,12 +46,6 @@ const SideMenu = props => {
       [dispatch, activeSectionId]
    );
 
-   if (!isLoading && !error && !sections.length) {
-      return (
-         <div>Sections fetching isn't started...</div>
-      )
-   }
-
    if (isLoading) {
       return (
          <div>Side menu is loading...</div>
@@ -63,6 +55,12 @@ const SideMenu = props => {
    if (error) {
       return (
          <div>Side menu error: {error}</div>
+      )
+   }
+
+   if (sections && !sections.length) {
+      return (
+         <div>No created sections yet...</div>
       )
    }
 

@@ -4,20 +4,15 @@ import { useSlate } from 'slate-react';
 import { useParams } from 'react-router-dom';
 import TextEditor from '../../components/TextEditor';
 import Dropdown from '../../components/Dropdown';
-import s from './styles.module.css';
-import { setPostSection, setPostShortTitle } from '../../actions/post';
+import { setPostSection, setPostShortTitle, isPostLoading, getPost } from '../../actions/post';
 import { getSections } from '../../actions/sections';
-import { getPost, isPostLoading } from '../../actions/post';
+import s from './styles.module.css';
 
 const EditPost = props => {
    const editor = useSlate();
    const { postId } = useParams();
    const { sections } = useSelector(state => state.sections);
-   const { isLoading, error,
-      post: { id, shortTitle, content,
-         section: { title: sectionTitle
-         } } } = useSelector(state => state.post);
-
+   const { isLoading, error, post } = useSelector(state => state.post);
    const dispatch = useDispatch();
 
    const handleSectionChange = e => {
@@ -32,27 +27,27 @@ const EditPost = props => {
       dispatch(setPostSection(e.target.innerHTML));
    }
 
-   useEffect(() => {
-      if (!sections.length) {
-         dispatch(getSections());
-      }
-   }, [dispatch, sections]);
+   useEffect(
+      () => {
+         if (!postId && !sections) dispatch(getSections());
+      },
+      [dispatch, postId, sections]
+   );
 
-   useEffect(() => {
-      if (postId) {
-         dispatch(getPost(postId));
-      }
+   useEffect(
+      () => {
+         if (postId) dispatch(getPost(postId));
+         if (!postId && !post.id) dispatch(isPostLoading(false)); // <== Allows to render page for new post creation
+      },
+      [dispatch, post.id, postId]
+   );
 
-      if (!id && !postId) {
-         dispatch(isPostLoading(false));
-      }
-   }, [dispatch, id, postId]);
-
-   useEffect(() => {
-      if (content) {
-         editor.children = JSON.parse(content);
-      }
-   }, [editor, content]);
+   useEffect(
+      () => {
+         if (post.content) editor.children = JSON.parse(post.content);
+      },
+      [editor, post]
+   );
 
    if (isLoading) {
       return <div>Post is loading...</div>
@@ -65,15 +60,15 @@ const EditPost = props => {
    const sectionTitleInput = <Input
       placeholder="Section title..."
       maxLength="50"
-      value={sectionTitle}
-      handleChange={postId ? () => {} : handleSectionChange} />
+      value={post.section.title}
+      handleChange={postId ? () => { } : handleSectionChange} />
 
    let sectionsOptions = [];
-   if (sections.length && !postId) {
-      if (sectionTitle) {
+   if (!postId && sections) {
+      if (post.section.title) {
          sectionsOptions = sections.filter(el => {
             const lowerTitle = el.title.toLowerCase();
-            const lowerInput = sectionTitle.toLowerCase();
+            const lowerInput = post.section.title.toLowerCase();
             return lowerTitle.indexOf(lowerInput) !== -1;
          }).map(el => {
             return <Option key={el.id} title={el.title} handleClick={handleSectionClick} />
@@ -89,7 +84,7 @@ const EditPost = props => {
       <>
          <div className={s.postTitlesBox}>
             <Dropdown options={sectionsOptions} label={sectionTitleInput} optionsClasses={s.optionsList} />
-            <Input placeholder="Short post title..." maxLength="50" value={shortTitle} handleChange={handleShortChange} />
+            <Input placeholder="Short post title..." maxLength="50" value={post.shortTitle} handleChange={handleShortChange} />
          </div>
          <TextEditor />
       </>
