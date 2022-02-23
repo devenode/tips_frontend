@@ -14,16 +14,16 @@ const Post = props => {
       error: null,
       post: null
    });
-   
+
    if (!postId && sections) postId = sections[0]?.posts[0].id;
    const children = post ? JSON.parse(post.content) : EMPTY_DOC;
-   
+
    useEffect(
       () => {
-         (async() => {
+         (async () => {
             try {
                if (!postId) return;
-               setPost(prev => { return { ...prev, isLoading: true }});
+               setPost(prev => { return { ...prev, isLoading: true } });
                const { data: post } = await req.get(`/post/${postId}`);
                setPost(prev => {
                   return {
@@ -58,7 +58,7 @@ const Post = props => {
    return (
       <>
          <Link className={s.editLink} to={`/edit-post/${post.id}`}>Edit</Link>
-         <div className={s.editorBox}>
+         <div className={`${s.editorBox} hide-scrollbar`}>
             {children.map((el, i) => <Fragment key={i}>{serializeToJSX(el)}</Fragment>)}
          </div>
       </>

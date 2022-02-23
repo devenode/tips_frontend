@@ -26,6 +26,11 @@ export const createPost = async post => {
    return newPost.data;
 }
 
+export const updatePost = async post => {
+   const newPost = await req.put(`/post`, post);
+   return newPost.data;
+}
+
 export const isPostLoading = isLoading => {
    return {
       type: POST_LOADING,

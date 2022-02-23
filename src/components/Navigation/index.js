@@ -8,7 +8,7 @@ import BlueButton from '../BlueButton';
 import s from './styles.module.css';
 import { useSlate } from 'slate-react';
 import { setError } from '../../actions/error';
-import { createPost, setPost } from '../../actions/post';
+import { createPost, updatePost, setPost } from '../../actions/post';
 import { getSections } from '../../actions/sections';
 import { initState } from '../../reducers/post';
 import { EMPTY_DOC, ZERO_SELECTION } from '../TextEditor/constants';
@@ -46,9 +46,13 @@ const Navigation = props => {
             setSaving(prev => true);
             const content = JSON.stringify(editor.children);
             post.content = content;
-            const newPost = await createPost(post);
+
+            let newPost;
+            if (post.id !== undefined && post.id.toString()) await updatePost(post);
+            else newPost = await createPost(post);
+            
             dispatch(getSections());
-            navigate(`/post/${newPost.id}`);
+            navigate(`/post/${newPost ? newPost.id : post.id}`);
 
          } catch (error) {
             if (error.response && error.response.data) dispatch(setError(error.response.data));

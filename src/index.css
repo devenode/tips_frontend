@@ -12,6 +12,7 @@ body {
    font-size: 1rem;
    font-weight: 400;
    color: #3A3A3A;
+   overflow: scroll;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
    -webkit-tap-highlight-color: #3A3A3A;
@@ -189,7 +190,7 @@ a:hover {
    -webkit-overflow-scrolling: touch;
 }
 
-.hrz-scroll::-webkit-scrollbar {
+.hide-scrollbar::-webkit-scrollbar {
    display: none;
 }
 
